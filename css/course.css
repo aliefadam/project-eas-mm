@@ -1,0 +1,101 @@
+@import url("style.css");
+
+header {
+    margin-top: 100px;
+    /* border: 1px solid red; */
+    font-family: "Inter", sans-serif;
+    height: 214px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+header h1 {
+    font-weight: 900;
+    font-size: 60px;
+}
+
+header span {
+    background-color: black;
+    color: white;
+    padding: 16px 54px;
+    border-radius: 30px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.courses {
+    margin-top: 100px;
+    /* border: 1px solid red; */
+    padding: 0 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 97px;
+}
+
+.courses .courses-item {
+    /* height: 400px; */
+    padding: 50px;
+    background-color: black;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+.courses .courses-item:hover {
+    transform: scale(1.02);
+}
+
+.courses .courses-item .atas {
+    /* border: 1px solid blue; */
+    display: flex;
+    gap: 30px;
+}
+
+.courses .courses-item .atas .item:first-child {
+    background-color: white;
+    width: 130px;
+    height: 125px;
+    display: grid;
+    place-items: center;
+    border-radius: 25px;
+}
+
+.courses .courses-item .atas .item:first-child img {
+    width: 80px;
+    height: 80px;
+}
+
+.courses .courses-item .atas .item:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.courses .courses-item .atas .item:last-child span {
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+
+.courses .courses-item .atas .item:last-child span:first-child {
+    font-size: 23px;
+    font-weight: 400;
+}
+
+.courses .courses-item .atas .item:last-child span:last-child {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.courses .courses-item .bawah {
+    margin-top: 40px;
+}
+
+.courses .courses-item .bawah span {
+    font-family: "Poppins", sans-serif;
+    color: white;
+    font-size: 17.9px;
+}

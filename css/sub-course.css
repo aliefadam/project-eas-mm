@@ -1,0 +1,102 @@
+@import url("style.css");
+
+header {
+    margin-top: 100px;
+    /* border: 1px solid red; */
+    font-family: "Inter", sans-serif;
+    height: 214px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header h1 {
+    font-weight: 900;
+    font-size: 60px;
+}
+
+header span {
+    background-color: black;
+    color: white;
+    padding: 16px 54px;
+    border-radius: 30px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.gambar {
+    margin-top: 100px;
+    padding: 0 200px;
+    /* border: 1px solid red; */
+}
+
+.gambar .gambar-item {
+    width: 100%;
+    /* border: 1px solid blue; */
+}
+
+.gambar .gambar-item img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.sub-course {
+    margin-top: 120px;
+    padding: 0 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    /* border: 1px solid red; */
+}
+
+.sub-course .sub-course-item {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    border-radius: 20px;
+    padding: 15px 60px;
+    background-color: black;
+    transition: 300ms;
+}
+
+.sub-course .sub-course-item:hover {
+    transform: scale(1.02);
+}
+
+.sub-course .sub-course-item .item span {
+    color: white;
+}
+
+.sub-course .sub-course-item .item:first-child {
+    background-color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+}
+
+.sub-course .sub-course-item .item:first-child span {
+    background-color: black;
+    font-family: "Poppins", sans-serif;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+    border-radius: 7.5px;
+    font-size: 20px;
+}
+
+.sub-course .sub-course-item .item:last-child {
+    display: flex;
+    align-items: center;
+}
+
+.sub-course .sub-course-item .item:last-child span {
+    font-family: "Poppins", sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+}

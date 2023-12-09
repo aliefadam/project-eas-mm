@@ -1,0 +1,70 @@
+@import url("style.css");
+
+header {
+    margin-top: 100px;
+    /* border: 1px solid red; */
+    font-family: "Inter", sans-serif;
+    height: 214px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+header h1 {
+    font-weight: 900;
+    font-size: 60px;
+}
+
+header span {
+    background-color: black;
+    color: white;
+    padding: 16px 54px;
+    border-radius: 30px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.detail {
+    margin-top: 80px;
+    padding: 0 200px;
+}
+
+.detail .title {
+    padding: 25px 0;
+    background-color: black;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+}
+
+.detail .title span {
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.detail .wrapper {
+    margin-top: 50px;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.detail .wrapper .text {
+    font-family: "Poppins", sans-serif;
+}
+
+.detail .wrapper .text span {
+    display: block;
+    font-size: 20px;
+    text-align: justify;
+}
+
+.detail .wrapper .gambar img {
+    width: 100%;
+    object-fit: cover;
+}

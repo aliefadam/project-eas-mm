@@ -1,0 +1,100 @@
+@import url("style.css");
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+.login {
+    width: 55%;
+    background-color: white;
+    padding: 20px 40px;
+    border-radius: 20px;
+    height: calc(100vh - 150px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 500ms;
+}
+
+.login h1 {
+    font-family: "Inter", sans-serif;
+    font-weight: 900;
+}
+
+.login form {
+    margin-top: 30px;
+    width: 100%;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login form .form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.login form .form-item-col {
+    /* border: 1px solid red; */
+    display: flex;
+    gap: 20px;
+}
+
+.login form .form-item-col > * {
+    flex: 1;
+}
+
+.login form .form-item label {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+}
+
+.login form .form-item label::after {
+    content: "*";
+    color: red;
+    margin-left: 5px;
+}
+
+.login form .form-item input {
+    font-family: "Poppins", sans-serif;
+    height: 45px;
+    border-radius: 8px;
+    border: 1px solid black;
+    padding: 15px;
+    font-size: 15px;
+}
+
+.login form .form-item.tombol {
+    margin-top: 15px;
+}
+
+.login form .form-item button {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    height: 45px;
+    border-radius: 8px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    transition: 500ms;
+}
+
+.login form .form-item button:active {
+    transform: translateY(5px);
+}
+
+.login form .form-item a {
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    color: #0075ff;
+    font-size: 15px;
+}

@@ -42,6 +42,7 @@ header span {
     border-radius: 40px;
     cursor: pointer;
     transition: 300ms;
+    /* border: 1px solid red; */
 }
 
 .courses .courses-item:hover {
@@ -51,7 +52,47 @@ header span {
 .courses .courses-item .atas {
     /* border: 1px solid blue; */
     display: flex;
+    justify-content: space-between;
+}
+
+.courses .courses-item .atas .user {
+    display: flex;
     gap: 30px;
+    width: 100%;
+    /* border: 1px solid blue; */
+}
+
+.courses .courses-item .atas .admin {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    /* border: 1px solid red; */
+}
+
+.courses .courses-item .atas .admin button {
+    font-family: "Poppins";
+    font-weight: 600;
+    padding: 10px 30px;
+    background-color: white;
+    border-radius: 10px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: 300ms;
+    display: flex;
+    align-items: center;
+}
+
+.courses .courses-item .atas .admin button i {
+    margin-right: 5px;
+}
+
+.courses .courses-item .atas .admin button:hover {
+    background-color: rgb(240, 238, 238);
+}
+
+.courses .courses-item .atas .admin button.btn-batal {
+    display: none;
 }
 
 .courses .courses-item .atas .item:first-child {
@@ -73,6 +114,24 @@ header span {
     flex-direction: column;
     justify-content: center;
     gap: 10px;
+    /* border: 1px solid red; */
+    width: 400px;
+    /* width: 80%; */
+}
+
+.courses .courses-item .atas .item:last-child input {
+    height: 50px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-family: "Poppins";
+    outline: none;
+    border-radius: 12px;
+    padding: 5px 10px;
+    font-size: 23px;
+    display: none;
+    /* width: 100px; */
+    width: 100%;
 }
 
 .courses .courses-item .atas .item:last-child span {
@@ -85,13 +144,30 @@ header span {
     font-weight: 400;
 }
 
-.courses .courses-item .atas .item:last-child span:last-child {
+.courses .courses-item .atas .item:last-child span:nth-child(3) {
     font-size: 25px;
     font-weight: 600;
 }
 
 .courses .courses-item .bawah {
     margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.courses .courses-item .bawah input {
+    height: 50px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-family: "Poppins";
+    outline: none;
+    border-radius: 12px;
+    padding: 5px 10px;
+    font-size: 23px;
+    display: none;
+    /* width: 100px; */
+    width: 100%;
 }
 
 .courses .courses-item .bawah span {

@@ -54,8 +54,67 @@ function register($data)
     }
 }
 
+function tambahCourse($data, $logo)
+{
+    $namaCourse = $data["nama-course"];
+    $jenisCourse = $data["jenis-course"];
+    $deskripsi = $data["desk-course"];
 
+    $ekstensiLogo = explode(".", $logo["name"]);
+    $namaLogo = date("YmdHis") . "." . end($ekstensiLogo);
 
+    move_uploaded_file($logo["tmp_name"], "../uploads/$namaLogo");
+
+    global $conn;
+    $query = "INSERT INTO courses VALUES(NULL, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "ssss", $namaCourse, $jenisCourse, $deskripsi, $namaLogo);
+    mysqli_stmt_execute($stmt);
+
+    header("Location: ../course.php");
+}
+
+function getDataCourse()
+{
+    global $conn;
+    $query = "SELECT * FROM courses";
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+function updateCourse($data)
+{
+    $idCourse = $data["id-course"];
+    $namaCourse = $data["nama-course"];
+    $jenisCourse = $data["jenis-course"];
+    $deskripsi = $data["desk-course"];
+
+    global $conn;
+    $query = "UPDATE courses SET nama_course = ?, jenis_course = ?, deskripsi = ? WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "ssss", $namaCourse, $jenisCourse, $deskripsi, $idCourse);
+    mysqli_stmt_execute($stmt);
+    header("Location: ../course.php");
+}
+
+function deleteCourse($id)
+{
+    global $conn;
+
+    $query = "SELECT * FROM courses WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($result)) {
+        $namaLogo = $row["logo"];
+        unlink("../uploads/$namaLogo");
+    }
+    $query = "DELETE FROM courses WHERE id = $id";
+    mysqli_query($conn, $query);
+    header("Location: ../course.php");
+}
 
 // ============================================
 
@@ -65,4 +124,16 @@ if (isset($_POST["login"])) {
 
 if (isset($_POST["register"])) {
     register($_POST);
+}
+
+if (isset($_POST["tambah-course"])) {
+    tambahCourse($_POST, $_FILES["logo-course"]);
+}
+
+if (isset($_POST["edit-course"])) {
+    updateCourse($_POST);
+}
+
+if (isset($_GET["id-hapus"])) {
+    deleteCourse($_GET["id-hapus"]);
 }

@@ -1,5 +1,30 @@
+const tambahCourse = document.querySelector(".tambah-course");
+const btnTampilTambahCourse = document.querySelector(".aksi button");
+tambahCourse.style.transition = "500ms";
+tambahCourse.style.opacity = "0";
+tambahCourse.style.transform = "translateY(-50px)";
+tambahCourse.style.position = "absolute";
+tambahCourse.style.top = "-1000px";
+
+btnTampilTambahCourse.addEventListener("click", () => {
+    if (btnTampilTambahCourse.innerHTML != "X Batal") {
+        btnTampilTambahCourse.innerHTML = "X Batal";
+        tambahCourse.style.opacity = "1";
+        tambahCourse.style.transform = "translateY(0)";
+        tambahCourse.style.position = "initial";
+    } else {
+        tambahCourse.style.transform = "translateY(-50px)";
+        tambahCourse.style.opacity = "0";
+        btnTampilTambahCourse.innerHTML = "+ Tambah Course";
+        setTimeout(() => {
+            tambahCourse.style.position = "absolute";
+        }, 500);
+    }
+});
+
 const courseItems = document.querySelectorAll(".courses-item");
 const btnEdits = document.querySelectorAll(".courses-item .admin button.btn-edit");
+const btnHapuss = document.querySelectorAll(".courses-item .admin button.btn-hapus");
 
 courseItems.forEach((item) => {
     item.addEventListener("click", () => {
@@ -7,7 +32,6 @@ courseItems.forEach((item) => {
     });
 });
 
-// let typeBtn = "button";
 btnEdits.forEach((item) => {
     const spanCourseName = item.parentElement.previousElementSibling.children[1].children[0];
     const textSpanCourseName = spanCourseName.innerHTML;
@@ -21,13 +45,17 @@ btnEdits.forEach((item) => {
     const textSpanDescription = spanDescription.innerHTML;
     const inputDescription = item.parentElement.parentElement.nextElementSibling.children[1];
 
-    const btnBatal = item.previousElementSibling;
+    const btnBatal = item.previousElementSibling.previousElementSibling;
+    const btnHapus = item.previousElementSibling;
+    const idCourse = item.parentElement.parentElement.parentElement.children[0].value;
 
     item.addEventListener("click", (e) => {
         e.stopPropagation();
         if (item.getAttribute("jenis") == "button") {
             e.target.innerHTML = `Simpan`;
-            e.target.previousElementSibling.style.display = "flex";
+            // e.target.previousElementSibling.style.display = "flex";
+            e.target.previousElementSibling.previousElementSibling.style.display = "flex";
+            e.target.previousElementSibling.style.display = "none";
             inputCourseName.style.display = "block";
             inputCourseName.value = textSpanCourseName;
             spanCourseName.style.display = "none";
@@ -54,10 +82,16 @@ btnEdits.forEach((item) => {
         e.stopPropagation();
     });
 
+    inputDescription.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+
     btnBatal.addEventListener("click", (e) => {
         e.stopPropagation();
         e.target.style.display = "none";
-        e.target.nextElementSibling.innerHTML = `Edit`;
+        // e.target.nextElementSibling.innerHTML = `Edit`;
+        e.target.nextElementSibling.nextElementSibling.innerHTML = `Edit`;
+        e.target.nextElementSibling.style.display = `block`;
 
         inputCourseName.style.display = "none";
         spanCourseName.style.display = "block";
@@ -69,5 +103,10 @@ btnEdits.forEach((item) => {
         spanDescription.style.display = "block";
 
         item.setAttribute("jenis", "button");
+    });
+
+    btnHapus.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.location = `functions/index.php?id-hapus=${idCourse}`;
     });
 });

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="css/course.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -74,12 +75,16 @@
         </div> -->
         <?php foreach (getDataCourse() as $course) : ?>
             <div class="courses-item">
-                <form action="functions/index.php" method="post">
+                <form action="functions/index.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id-course" id="id-course" value="<?= $course["id"] ?>">
                     <div class="atas">
                         <div class="user">
                             <div class="item">
                                 <img src="uploads/<?= $course["logo"] ?>" alt="">
+                                <div class="overlay">
+                                    <i class="bi bi-pencil-square"></i>
+                                </div>
+                                <input type="file" name="logo-course" id="">
                             </div>
                             <div class="item">
                                 <span><?= $course["nama_course"] ?></span>
@@ -129,6 +134,19 @@
             </form>
         </div>
     </section>
+
+    <!-- overlay hapus konfirmasi hapus course -->
+    <div class="overlay konfirmasi-hapus-course">
+        <div class="box">
+            <span>Yakin ingin menghapus course ini?</span>
+            <div class="aksi">
+                <button type="button">Batal</button>
+                <button type="button">Yakin</button>
+            </div>
+        </div>
+    </div>
+    <!-- akhir overlay hapus konfirmasi hapus course -->
+
     <!-- footer -->
     <?php include("components/footer.php") ?>
     <!-- akhir footer -->

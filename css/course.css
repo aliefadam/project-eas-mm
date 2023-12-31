@@ -1,5 +1,9 @@
 @import url("style.css");
 
+body {
+    position: relative;
+}
+
 header {
     margin-top: 100px;
     /* border: 1px solid red; */
@@ -101,6 +105,26 @@ header span {
     display: grid;
     place-items: center;
     border-radius: 25px;
+    position: relative;
+}
+
+.courses .courses-item .atas .item:first-child .overlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-content: center;
+    display: none;
+}
+
+.courses .courses-item .atas .item:first-child input {
+    display: none;
+}
+
+.courses .courses-item .atas .item:first-child .overlay i {
+    color: white;
+    font-size: 30px;
 }
 
 .courses .courses-item .atas .item:first-child img {
@@ -276,4 +300,101 @@ header span {
         color: black;
         font-weight: 600;
     }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    content: "";
+    display: none;
+    place-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.overlay .box {
+    padding: 20px 30px;
+    background-color: black;
+    font-family: "Poppins", sans-serif;
+    border-radius: 12px;
+    border: 2px solid white;
+    transition: 300ms;
+    animation: 300ms fadeInDown;
+}
+
+@keyframes fadeInDown {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+@keyframes fadeOutUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-50px);
+    }
+}
+
+.overlay .box span {
+    color: white;
+}
+
+.overlay .box .aksi {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.overlay .box .aksi button {
+    font-family: "Poppins", sans-serif;
+    width: 100px;
+    font-size: 15px;
+    padding: 5px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.overlay .box .aksi button:first-child {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    transition: 300ms;
+
+    &:hover {
+        background-color: white;
+        color: black;
+        font-weight: 600;
+    }
+}
+
+.overlay .box .aksi button:last-child {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    font-weight: 600;
 }

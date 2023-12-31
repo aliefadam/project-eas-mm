@@ -49,6 +49,11 @@ btnEdits.forEach((item) => {
     const btnHapus = item.previousElementSibling;
     const idCourse = item.parentElement.parentElement.parentElement.children[0].value;
 
+    const overlayEditFoto = item.parentElement.previousElementSibling.children[0].children[1];
+    const editFoto = item.parentElement.previousElementSibling.children[0].children[0];
+    const srcLama = editFoto.src;
+    const inputEditFoto = item.parentElement.previousElementSibling.children[0].children[2];
+
     item.addEventListener("click", (e) => {
         e.stopPropagation();
         if (item.getAttribute("jenis") == "button") {
@@ -68,6 +73,8 @@ btnEdits.forEach((item) => {
             inputDescription.value = textSpanDescription;
             spanCourseSubName.style.display = "none";
 
+            overlayEditFoto.style.display = "grid";
+
             e.target.setAttribute("jenis", "submit");
         } else {
             e.target.setAttribute("type", "submit");
@@ -86,6 +93,26 @@ btnEdits.forEach((item) => {
         e.stopPropagation();
     });
 
+    overlayEditFoto.addEventListener("click", (e) => {
+        e.stopPropagation();
+        inputEditFoto.click();
+    });
+
+    inputEditFoto.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+
+    inputEditFoto.addEventListener("change", () => {
+        if (inputEditFoto.files && inputEditFoto.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                editFoto.src = e.target.result;
+            };
+
+            reader.readAsDataURL(inputEditFoto.files[0]);
+        }
+    });
+
     btnBatal.addEventListener("click", (e) => {
         e.stopPropagation();
         e.target.style.display = "none";
@@ -102,11 +129,34 @@ btnEdits.forEach((item) => {
         inputDescription.style.display = "none";
         spanDescription.style.display = "block";
 
+        overlayEditFoto.style.display = "none";
+        editFoto.src = srcLama;
+        inputEditFoto.value = "";
+
         item.setAttribute("jenis", "button");
     });
 
+    const konfirmasiHapusCourse = document.querySelector(".konfirmasi-hapus-course");
+    const boxKonfirmasiHapusCourse = konfirmasiHapusCourse.children[0];
+    const btnBatalKonfirmasiHapusCourse = konfirmasiHapusCourse.children[0].children[1].children[0];
+    const btnYakinKonfirmasiHapusCourse = btnBatalKonfirmasiHapusCourse.nextElementSibling;
+
     btnHapus.addEventListener("click", (e) => {
         e.stopPropagation();
+        konfirmasiHapusCourse.style.display = "grid";
+        konfirmasiHapusCourse.style.animation = "300ms fadeIn";
+        boxKonfirmasiHapusCourse.style.animation = "300ms fadeInDown";
+    });
+
+    btnBatalKonfirmasiHapusCourse.addEventListener("click", () => {
+        boxKonfirmasiHapusCourse.style.animation = "300ms fadeOutUp forwards";
+        konfirmasiHapusCourse.style.animation = "300ms fadeOut forwards";
+        setTimeout(() => {
+            konfirmasiHapusCourse.style.display = "none";
+        }, 300);
+    });
+
+    btnYakinKonfirmasiHapusCourse.addEventListener("click", () => {
         window.location = `functions/index.php?id-hapus=${idCourse}`;
     });
 });

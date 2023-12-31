@@ -86,7 +86,7 @@ function getDataCourse()
     return $rows;
 }
 
-function updateCourse($data)
+function updateCourse($data, $logo)
 {
     $idCourse = $data["id-course"];
     $namaCourse = $data["nama-course"];
@@ -94,10 +94,30 @@ function updateCourse($data)
     $deskripsi = $data["desk-course"];
 
     global $conn;
-    $query = "UPDATE courses SET nama_course = ?, jenis_course = ?, deskripsi = ? WHERE id = ?";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "ssss", $namaCourse, $jenisCourse, $deskripsi, $idCourse);
-    mysqli_stmt_execute($stmt);
+
+    if ($logo["name"] == "") {
+        $query = "UPDATE courses SET nama_course = ?, jenis_course = ?, deskripsi = ? WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, "ssss", $namaCourse, $jenisCourse, $deskripsi, $idCourse);
+        mysqli_stmt_execute($stmt);
+    } else {
+        $query = "SELECT * FROM courses WHERE id = $idCourse";
+        $result = mysqli_query($conn, $query);
+        if ($row = mysqli_fetch_assoc($result)) {
+            $namaLogo = $row["logo"];
+            unlink("../uploads/$namaLogo");
+        }
+        $query = "DELETE FROM courses WHERE id = $idCourse";
+        mysqli_query($conn, $query);
+
+        $ekstensiLogo = explode(".", $logo["name"]);
+        $namaLogo = date("YmdHis") . "." . end($ekstensiLogo);
+        move_uploaded_file($logo["tmp_name"], "../uploads/$namaLogo");
+        $query = "INSERT INTO courses VALUES(NULL, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $query);
+        mysqli_stmt_bind_param($stmt, "ssss", $namaCourse, $jenisCourse, $deskripsi, $namaLogo);
+        mysqli_stmt_execute($stmt);
+    }
     header("Location: ../course.php");
 }
 
@@ -131,7 +151,7 @@ if (isset($_POST["tambah-course"])) {
 }
 
 if (isset($_POST["edit-course"])) {
-    updateCourse($_POST);
+    updateCourse($_POST, $_FILES["logo-course"]);
 }
 
 if (isset($_GET["id-hapus"])) {

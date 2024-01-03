@@ -136,6 +136,57 @@ function deleteCourse($id)
     header("Location: ../course.php");
 }
 
+function tambahMateri($data)
+{
+    global $conn;
+    $namaMateri = htmlspecialchars($data["nama_materi"]);
+    $courseId = $data["course_id"];
+
+    $query = "INSERT INTO materi VALUES(NULL, ?, ?)";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "si", $namaMateri, $courseId);
+    mysqli_stmt_execute($stmt);
+
+    header("Location: ../sub-course.php?course=$courseId");
+}
+
+function getDataMateri($courseId)
+{
+    global $conn;
+    $query = "SELECT * FROM materi WHERE course_id = $courseId";
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+
+function updateMateri($data)
+{
+    global $conn;
+    $courseId = $data["course_id"];
+    $materiId = $data["materi_id"];
+    $namaMateri = $data["nama_materi"];
+
+    $query = "UPDATE materi SET nama_materi = ? WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "si", $namaMateri, $materiId);
+    mysqli_stmt_execute($stmt);
+
+    header("Location: ../sub-course.php?course=$courseId");
+}
+
+function deleteMateri($materiId, $courseId)
+{
+
+    global $conn;
+
+    $query = "DELETE FROM materi WHERE id = $materiId";
+    mysqli_query($conn, $query);
+    header("Location: ../sub-course.php?course=$courseId");
+}
+
 // ============================================
 
 if (isset($_POST["login"])) {
@@ -156,4 +207,16 @@ if (isset($_POST["edit-course"])) {
 
 if (isset($_GET["id-hapus"])) {
     deleteCourse($_GET["id-hapus"]);
+}
+
+if (isset($_POST["tambah-materi"])) {
+    tambahMateri($_POST);
+}
+
+if (isset($_POST["update-materi"])) {
+    updateMateri($_POST);
+}
+
+if (isset($_GET["id-hapus-materi"])) {
+    deleteMateri($_GET["id-hapus-materi"], $_GET["course-id"]);
 }

@@ -95,7 +95,7 @@
                         </div>
                         <div class="admin">
                             <button type="button" class="btn-batal edit-course">Batal</button>
-                            <button type="button" class="btn-hapus hapus-course">Hapus</button>
+                            <button type="button" course-id="<?= $course["id"] ?>" class="btn-hapus hapus-course">Hapus</button>
                             <button name="edit-course" jenis="button" type="button" class="btn-edit edit-course">Edit</button>
                         </div>
                     </div>

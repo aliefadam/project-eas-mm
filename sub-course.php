@@ -1,3 +1,4 @@
+<?php require_once("functions/index.php") ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,83 +30,63 @@
     <!-- akhir gambar -->
 
     <section class="sub-course">
-        <a href="detail-sub-course.php" class="sub-course-item">
-            <div class="item">
-                <span>1</span>
-            </div>
-            <div class="item">
-                <span>Basics Of Html To Edit Website</span>
-            </div>
-        </a>
-        <a href="detail-sub-course.php" class="sub-course-item">
-            <div class="item">
-                <span>2</span>
-            </div>
-            <div class="item">
-                <span>Basics Of Html To Edit Website</span>
-            </div>
-        </a>
-        <a href="detail-sub-course.php" class="sub-course-item">
-            <div class="item">
-                <span>3</span>
-            </div>
-            <div class="item">
-                <span>Basics Of Html To Edit Website</span>
-            </div>
-        </a>
-        <a href="detail-sub-course.php" class="sub-course-item">
-            <div class="item">
-                <span>4</span>
-            </div>
-            <div class="item">
-                <span>Basics Of Html To Edit Website</span>
-            </div>
-        </a>
-        <a href="detail-sub-course.php" class="sub-course-item">
-            <div class="item">
-                <span>5</span>
-            </div>
-            <div class="item">
-                <span>Basics Of Html To Edit Website</span>
-            </div>
-        </a>
-        <a href="detail-sub-course.php" class="sub-course-item">
-            <div class="item">
-                <span>6</span>
-            </div>
-            <div class="item">
-                <span>Basics Of Html To Edit Website</span>
-            </div>
-        </a>
-        <a href="" class="sub-course-item">
-            <div class="item">
-                <span>7</span>
-            </div>
-            <div class="item">
-                <span>Basics Of Html To Edit Website</span>
-            </div>
-        </a>
-        <a href="detail-sub-course.php" class="sub-course-item">
-            <div class="item">
-                <span>8</span>
-            </div>
-            <div class="item">
-                <span>Basics Of Html To Edit Website</span>
-            </div>
-        </a>
-        <a href="detail-sub-course.php" class="sub-course-item">
-            <div class="item">
-                <span>9</span>
-            </div>
-            <div class="item">
-                <span>Basics Of Html To Edit Website</span>
-            </div>
-        </a>
+        <?php $no = 1; ?>
+        <?php foreach (getDataMateri($_GET["course"]) as $materi) : ?>
+            <a href="detail-sub-course.php" class="sub-course-item">
+                <form action="functions/index.php" method="post">
+                    <input type="hidden" name="materi_id" value="<?= $materi["id"] ?>">
+                    <input type="hidden" name="course_id" value="<?= $_GET["course"] ?>">
+                    <div class="user">
+                        <div class="item">
+                            <span><?= $no++ ?></span>
+                        </div>
+                        <div class="item">
+                            <span nama-materi="<?= $materi["nama_materi"] ?>"><?= $materi["nama_materi"] ?></span>
+                            <input type="text" name="nama_materi">
+                        </div>
+                    </div>
+                    <div class="admin">
+                        <button type="button" course-id="<?= $_GET["course"] ?>" materi-id="<?= $materi["id"] ?>" class="btn-hapus">Hapus</button>
+                        <button type="button" class="btn-edit">Edit</button>
+                    </div>
+                </form>
+            </a>
+        <?php endforeach; ?>
+        <div class="aksi">
+            <button type="button">+ Tambah Materi</button>
+        </div>
+        <div class="tambah-course">
+            <h1>Tambah Materi</h1>
+            <form action="functions/index.php" method="post">
+                <input type="hidden" name="course_id" value="<?= $_GET["course"] ?>">
+                <div class="form-item">
+                    <label for="nama_materi">Nama Materi</label>
+                    <input type="text" name="nama_materi" id="nama_materi">
+                </div>
+                <div class="form-item">
+                    <button name="tambah-materi">Tambah</button>
+                </div>
+            </form>
+        </div>
     </section>
+
+    <!-- overlay hapus konfirmasi hapus course -->
+    <div class="overlay konfirmasi-hapus-course">
+        <div class="box">
+            <span>Yakin ingin menghapus course ini?</span>
+            <div class="aksi">
+                <button type="button">Batal</button>
+                <button type="button">Yakin</button>
+            </div>
+        </div>
+    </div>
+    <!-- akhir overlay hapus konfirmasi hapus course -->
 
     <!-- footer -->
     <?php include("components/footer.php") ?>
     <!-- akhir footer -->
+
+    <script src="js/sub-course.js"></script>
 </body>
 
 </html>

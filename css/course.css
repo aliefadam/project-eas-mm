@@ -339,7 +339,6 @@ header span {
     border-radius: 12px;
     border: 2px solid white;
     transition: 300ms;
-    animation: 300ms fadeInDown;
 }
 
 @keyframes fadeInDown {

@@ -28,7 +28,9 @@ const btnHapuss = document.querySelectorAll(".courses-item .admin button.btn-hap
 
 courseItems.forEach((item) => {
     item.addEventListener("click", () => {
-        window.location = "sub-course.php";
+        // const courseId = item.children[0].children[1].children[0].children[1].children[0].innerHTML.toLowerCase();
+        const courseId = item.children[0].children[0].value;
+        window.location = "sub-course.php?course=" + courseId;
     });
 });
 
@@ -116,7 +118,6 @@ btnEdits.forEach((item) => {
     btnBatal.addEventListener("click", (e) => {
         e.stopPropagation();
         e.target.style.display = "none";
-        // e.target.nextElementSibling.innerHTML = `Edit`;
         e.target.nextElementSibling.nextElementSibling.innerHTML = `Edit`;
         e.target.nextElementSibling.style.display = `block`;
 
@@ -146,6 +147,7 @@ btnEdits.forEach((item) => {
         konfirmasiHapusCourse.style.display = "grid";
         konfirmasiHapusCourse.style.animation = "300ms fadeIn";
         boxKonfirmasiHapusCourse.style.animation = "300ms fadeInDown";
+        courseId = e.target.getAttribute("course-id");
     });
 
     btnBatalKonfirmasiHapusCourse.addEventListener("click", () => {
@@ -157,6 +159,6 @@ btnEdits.forEach((item) => {
     });
 
     btnYakinKonfirmasiHapusCourse.addEventListener("click", () => {
-        window.location = `functions/index.php?id-hapus=${idCourse}`;
+        window.location = `functions/index.php?id-hapus=${courseId}`;
     });
 });

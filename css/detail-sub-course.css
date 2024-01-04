@@ -51,7 +51,13 @@ header span {
     /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 30px;
+}
+
+.detail .wrapper .judul span {
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    font-size: 30px;
 }
 
 .detail .wrapper .text {
@@ -64,7 +70,168 @@ header span {
     text-align: justify;
 }
 
+.detail .wrapper .gambar {
+    width: 100%;
+    /* border: 1px solid blue; */
+}
+
 .detail .wrapper .gambar img {
     width: 100%;
-    object-fit: cover;
+    /* border: 1px solid red; */
+    border-radius: 10px;
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
+}
+
+.detail .wrapper .aksi {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.detail .wrapper .aksi button {
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    height: 45px;
+    width: 100%;
+    border-radius: 12px;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    transition: 300ms;
+    cursor: pointer;
+
+    &:hover {
+        background-color: black;
+        color: white;
+    }
+
+    &:active {
+        transform: translateY(3px);
+    }
+}
+
+.detail .wrapper .aksi .tambah-judul,
+.detail .wrapper .aksi .tambah-teks {
+    padding: 50px;
+    background-color: black;
+    border-radius: 40px;
+    font-family: "Poppins", sans-serif;
+    display: none;
+}
+
+.detail .wrapper .aksi .tambah-judul h1,
+.detail .wrapper .aksi .tambah-teks h1 {
+    color: white;
+    text-align: center;
+    font-size: 40px;
+}
+
+.detail .wrapper .aksi .tambah-judul form,
+.detail .wrapper .aksi .tambah-teks form {
+    margin-top: 20px;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.detail .wrapper .aksi .tambah-judul form .form-item,
+.detail .wrapper .aksi .tambah-teks form .form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail .wrapper .aksi .tambah-judul form .form-item label,
+.detail .wrapper .aksi .tambah-teks form .form-item label {
+    color: white;
+    font-size: 18px;
+}
+
+.detail .wrapper .aksi .tambah-judul form .form-item input,
+.detail .wrapper .aksi .tambah-teks form .form-item input {
+    border: none;
+    outline: none;
+    border-radius: 12px;
+    height: 45px;
+    font-size: 15px;
+    padding: 0 10px;
+    font-family: "Poppins", sans-serif;
+}
+
+.detail .wrapper .aksi .tambah-judul form .form-item button,
+.detail .wrapper .aksi .tambah-teks form .form-item button {
+    border: 1px solid white;
+    outline: none;
+    background-color: black;
+    color: white;
+    border-radius: 12px;
+    height: 45px;
+    font-size: 15px;
+    padding: 0 10px;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+        background-color: white;
+        color: black;
+        font-weight: 600;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutUp {
+    to {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+}
+
+.detail .wrapper .aksi .tambah-gambar {
+    display: flex;
+    gap: 20px;
+    display: none;
+}
+
+.detail .wrapper .aksi .tambah-gambar button {
+    flex: 1;
+    background-color: black;
+    color: white;
+    font-size: 15px;
+}
+
+#pilih-gambar {
+    border: 2px solid black;
+    background-color: white;
+    height: 45px;
+    outline: none;
+    font-family: "Poppins", sans-serif;
+    border-radius: 12px;
+    cursor: pointer;
+    padding-right: 20px;
+    flex: 1;
+    font-size: 15px;
+}
+
+::-webkit-file-upload-button {
+    background-color: black;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    height: 100%;
+    border: none;
+    padding: 5px 10px;
+    width: 100px;
+    margin-right: 15px;
+    cursor: pointer;
 }

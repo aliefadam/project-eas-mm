@@ -51,7 +51,7 @@ header span {
     /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 15px;
 }
 
 .detail .wrapper .judul span {
@@ -60,8 +60,73 @@ header span {
     font-size: 30px;
 }
 
-.detail .wrapper .text {
+.detail .wrapper .text.admin-edit,
+.detail .wrapper .judul.admin-edit {
     font-family: "Poppins", sans-serif;
+    transition: 500ms;
+    position: relative;
+    /* border: 1px solid red; */
+}
+
+.detail .wrapper .judul textarea,
+.detail .wrapper .text textarea,
+.detail .wrapper .judul input,
+.detail .wrapper .text input {
+    width: 80%;
+    border-radius: 12px;
+    padding: 5px 10px;
+    font-family: "Poppins", sans-serif;
+    border: 2px solid black;
+    font-size: 17px;
+    display: none;
+}
+
+.detail .wrapper textarea {
+    height: 300px;
+}
+
+.detail .wrapper .judul input {
+    font-weight: bold;
+    font-size: 20px;
+    height: 45px;
+}
+
+.overlay-admin {
+    background-color: transparent;
+    position: absolute;
+    /* width: 100%; */
+    height: 100%;
+    top: 0;
+    right: 0;
+    display: none;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 5px;
+    /* border: 1px solid gray; */
+    border-radius: 12px;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+}
+
+.overlay-admin button {
+    background-color: white;
+    border: 2px solid black;
+    color: black;
+    font-family: "Poppins", sans-serif;
+    padding: 5px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.2);
+    transition: 300ms;
+    font-weight: bold;
+
+    &:hover {
+        background-color: black;
+        color: white;
+    }
+
+    &:active {
+        transform: translateY(3px);
+    }
 }
 
 .detail .wrapper .text span {
@@ -71,6 +136,7 @@ header span {
 }
 
 .detail .wrapper .gambar {
+    margin-top: 10px;
     width: 100%;
     /* border: 1px solid blue; */
 }
@@ -86,6 +152,7 @@ header span {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-top: 20px;
 }
 
 .detail .wrapper .aksi button {

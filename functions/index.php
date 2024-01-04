@@ -165,7 +165,7 @@ function updateMateri($data)
     global $conn;
     $courseId = $data["course_id"];
     $materiId = $data["materi_id"];
-    $namaMateri = $data["nama_materi"];
+    $namaMateri = htmlspecialchars($data["nama_materi"]);
 
     $query = "UPDATE materi SET nama_materi = ? WHERE id = ?";
     $stmt = mysqli_prepare($conn, $query);
@@ -189,7 +189,7 @@ function tambahJudul($data)
 {
     global $conn;
     $materiId = $data["materi_id"];
-    $isi = $data["isi"];
+    $isi = htmlspecialchars($data["isi"]);
     $jenisDetailMateri = "judul";
 
     $query = "INSERT INTO detail_materi VALUES(NULL, ?, ?, ?)";
@@ -204,7 +204,7 @@ function tambahTeks($data)
 {
     global $conn;
     $materiId = $data["materi_id"];
-    $isi = $data["isi"];
+    $isi = htmlspecialchars($data["isi"]);
     $jenisDetailMateri = "text";
 
     $query = "INSERT INTO detail_materi VALUES(NULL, ?, ?, ?)";
@@ -256,6 +256,29 @@ function getDataDetailMateri($materiId)
     return $rows;
 }
 
+function updateDetailMateri($data)
+{
+    global $conn;
+    $detailMateriId = $data["detail_materi_id"];
+    $materiId = $data["materi_id"];
+    $jenis = $data["jenis"];
+    $isi = htmlspecialchars($data["isi"]);
+
+    // var_dump([
+    //     $detailMateriId = $data["detail_materi_id"],
+    //     $materiId = $data["materi_id"],
+    //     $jenis = $data["jenis"],
+    //     $isi = $data["isi"],
+    // ]);
+    // exit;
+    $query = "UPDATE detail_materi SET isi = ? WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "si", $isi, $detailMateriId);
+    mysqli_stmt_execute($stmt);
+
+    header("Location: ../detail-sub-course.php?materi_id=$materiId");
+}
+
 // ============================================
 
 if (isset($_POST["login"])) {
@@ -300,4 +323,8 @@ if (isset($_POST["tambah-teks"])) {
 
 if (isset($_POST["tambah-gambar"])) {
     tambahGambar($_POST, $_FILES["pilih-gambar"]);
+}
+
+if (isset($_POST["edit-detail-materi"])) {
+    updateDetailMateri($_POST);
 }

@@ -28,14 +28,19 @@
             <span><?= getJudulMateri($_GET["materi_id"]) ?></span>
         </div>
         <div class="wrapper">
-            <?php foreach (getDataDetailMateri($_GET["materi_id"]) as ["id" => $id, "jenis_detail_materi" => $jenis, "isi" => $isi]) : ?>
-                <form action="functions/index.php" method="post">
+            <?php foreach (getDataDetailMateri($_GET["materi_id"]) as ["id" => $id, "jenis_detail_materi" => $jenis, "isi" => $isi, "materi_id" => $materiId]) : ?>
+                <form action="functions/index.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="detail_materi_id" value="<?= $id ?>">
                     <input type="hidden" name="materi_id" value="<?= $_GET["materi_id"] ?>">
                     <input type="hidden" name="jenis" value="<?= $jenis ?>">
                     <div class="<?= $jenis ?> admin-edit">
                         <?php if ($jenis == "gambar") : ?>
                             <img src="uploads/<?= $isi ?>" alt="">
+                            <input type="file" name="isi" id="isi">
+                            <div jenis="gambar" class="overlay-admin">
+                                <button type="button" detail-materi-id="<?= $id ?>" materi-id="<?= $materiId ?>">Hapus</button>
+                                <button type="button" jenis="button" name="edit-detail-materi-gambar" jenis-materi="<?= $jenis ?>">Ganti Gambar</button>
+                            </div>
                         <?php else : ?>
                             <span isi="<?= $isi ?>"><?= $isi ?></span>
                             <?php if ($jenis == "judul") : ?>
@@ -43,9 +48,9 @@
                             <?php else : ?>
                                 <textarea type="text" name="isi" id="isi" class="<?= $jenis ?>"></textarea>
                             <?php endif; ?>
-                            <div class="overlay-admin">
-                                <button type="button">Hapus</button>
-                                <button type="button" jenis="button" name="edit-detail-materi">Edit</button>
+                            <div jenis="teks" class="overlay-admin">
+                                <button type="button" detail-materi-id="<?= $id ?>" materi-id="<?= $materiId ?>">Hapus</button>
+                                <button type="button" jenis="button" name="edit-detail-materi" jenis-materi="<?= $jenis ?>">Edit</button>
                             </div>
                         <?php endif ?>
                     </div>
@@ -100,6 +105,18 @@
             </div>
         </div>
     </section>
+
+    <!-- overlay hapus konfirmasi hapus course -->
+    <div class="overlay konfirmasi-hapus-course">
+        <div class="box">
+            <span>Yakin ingin menghapus detail ini?</span>
+            <div class="aksi">
+                <button type="button">Batal</button>
+                <button type="button">Yakin</button>
+            </div>
+        </div>
+    </div>
+    <!-- akhir overlay hapus konfirmasi hapus course -->
 
     <!-- footer -->
     <?php include("components/footer.php") ?>

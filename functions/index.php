@@ -279,6 +279,38 @@ function updateDetailMateri($data)
     header("Location: ../detail-sub-course.php?materi_id=$materiId");
 }
 
+function updateDetailMateriGambar($data, $gambar)
+{
+    global $conn;
+    $detailMateriId = $data["detail_materi_id"];
+    $materiId = $data["materi_id"];
+    $ektensiGambar = explode(".", $gambar["name"])[1];
+    $namaGambar = date("YmdHis") . ".$ektensiGambar";
+    move_uploaded_file($gambar["tmp_name"], "../uploads/$namaGambar");
+
+    $query = "SELECT * FROM detail_materi WHERE id = $detailMateriId";
+    $result = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($result)) {
+        $namaGambarLama = $row["isi"];
+        unlink("../uploads/$namaGambarLama");
+    }
+
+    $query = "UPDATE detail_materi SET isi = ? WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "si", $namaGambar, $detailMateriId);
+    mysqli_stmt_execute($stmt);
+
+    header("Location: ../detail-sub-course.php?materi_id=$materiId");
+}
+
+function deleteDetailMateri($detailMateriId, $materiId)
+{
+    global $conn;
+    $query = "DELETE FROM detail_materi WHERE id = $detailMateriId";
+    mysqli_query($conn, $query);
+    header("Location: ../detail-sub-course.php?materi_id=$materiId");
+}
+
 // ============================================
 
 if (isset($_POST["login"])) {
@@ -327,4 +359,12 @@ if (isset($_POST["tambah-gambar"])) {
 
 if (isset($_POST["edit-detail-materi"])) {
     updateDetailMateri($_POST);
+}
+
+if (isset($_POST["edit-detail-materi-gambar"])) {
+    updateDetailMateriGambar($_POST, $_FILES["isi"]);
+}
+
+if (isset($_GET["id-hapus-detail-materi"])) {
+    deleteDetailMateri($_GET["id-hapus-detail-materi"], $_GET["materi-id"]);
 }

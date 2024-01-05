@@ -1,62 +1,3 @@
-const adminEdit = document.querySelectorAll(".admin-edit");
-
-adminEdit.forEach((item) => {
-    const span = item.children[0];
-    const inputSpan = item.children[1];
-    const overlayAdmin = item.children[2];
-    const btnEdit = overlayAdmin.children[1];
-    const btnHapus = overlayAdmin.children[0];
-
-    const mouseOverHandler = () => {
-        overlayAdmin.style.display = "flex";
-    };
-
-    const mouseOutHandler = () => {
-        overlayAdmin.style.display = "none";
-    };
-
-    const btnEditClickHandler = () => {
-        if (btnEdit.getAttribute("jenis") == "button") {
-            item.removeEventListener("mouseover", mouseOverHandler);
-            item.removeEventListener("mouseout", mouseOutHandler);
-            btnEdit.innerHTML = "Simpan";
-            btnHapus.innerHTML = "Batal";
-            overlayAdmin.style.width = "fit-content";
-            overlayAdmin.style.alignItems = "center";
-            inputSpan.value = span.getAttribute("isi");
-            inputSpan.style.display = "initial";
-            span.style.display = "none";
-            btnEdit.setAttribute("jenis", "submit");
-        } else {
-            btnEdit.setAttribute("type", "submit");
-        }
-    };
-
-    const btnHapusClickHandler = () => {
-        item.addEventListener("mouseover", mouseOverHandler);
-        item.addEventListener("mouseout", mouseOutHandler);
-        btnEdit.addEventListener("click", btnEditClickHandler);
-        overlayAdmin.style.alignItems = "flex-start";
-        btnEdit.innerHTML = "Edit";
-        btnHapus.innerHTML = "Hapus";
-        inputSpan.style.display = "none";
-        span.style.display = "block";
-        btnEdit.setAttribute("jenis", "button");
-    };
-
-    item.addEventListener("mouseover", mouseOverHandler);
-    item.addEventListener("mouseout", mouseOutHandler);
-    btnEdit.addEventListener("click", btnEditClickHandler);
-    btnHapus.addEventListener("click", btnHapusClickHandler);
-});
-
-// adminEdit.addEventListener("mouseover", () => {
-//     overlayAdmin.style.display = "flex";
-// });
-// adminEdit.addEventListener("mouseout", () => {
-//     overlayAdmin.style.display = "none";
-// });
-
 const btnTambahJudul = document.querySelector(".btn-tambah-judul");
 const containerTambahJudul = document.querySelector(".tambah-judul");
 const btnTambahTeks = document.querySelector(".btn-tambah-teks");
@@ -109,4 +50,115 @@ inputTambahGambar.addEventListener("change", (e) => {
     containerTambahGambar.style.display = "flex";
     containerTambahGambar.style.animation = "500ms fadeInDown forwards";
     btnTambahGambar.innerHTML = "X Batal";
+});
+
+const adminEdit = document.querySelectorAll(".admin-edit");
+
+adminEdit.forEach((item) => {
+    const span = item.children[0];
+    const inputSpan = item.children[1];
+    const overlayAdmin = item.children[2];
+    const btnEdit = overlayAdmin.children[1];
+    const btnHapus = overlayAdmin.children[0];
+
+    const mouseOverHandler = () => {
+        overlayAdmin.style.display = "flex";
+    };
+
+    const mouseOutHandler = () => {
+        overlayAdmin.style.display = "none";
+    };
+
+    const gambar = item.children[0];
+    const srcGambarLama = gambar.src;
+    const inputGambar = gambar.nextElementSibling;
+
+    inputGambar.addEventListener("change", () => {
+        if (inputGambar.files && inputGambar.files[0]) {
+            var reader = new FileReader();
+            reader.onload = (e) => {
+                gambar.src = e.target.result;
+            };
+
+            reader.readAsDataURL(inputGambar.files[0]);
+            btnEdit.setAttribute("type", "submit");
+            btnEdit.innerHTML = "Simpan";
+            btnHapus.innerHTML = "Batal";
+        }
+    });
+
+    const btnEditClickHandler = () => {
+        if (overlayAdmin.getAttribute("jenis") == "gambar") {
+            if (btnEdit.getAttribute("jenis") == "button") {
+                item.removeEventListener("mouseover", mouseOverHandler);
+                item.removeEventListener("mouseout", mouseOutHandler);
+                if (btnEdit.getAttribute("type") != "submit") {
+                    inputGambar.click();
+                }
+            } else {
+                // btnEdit.setAttribute("type", "submit");
+            }
+        } else {
+            if (btnEdit.getAttribute("jenis") == "button") {
+                item.removeEventListener("mouseover", mouseOverHandler);
+                item.removeEventListener("mouseout", mouseOutHandler);
+                btnEdit.innerHTML = "Simpan";
+                btnHapus.innerHTML = "Batal";
+                overlayAdmin.style.width = "fit-content";
+                if (btnEdit.getAttribute("jenis-materi") != "text") {
+                    overlayAdmin.style.alignItems = "center";
+                }
+                inputSpan.value = span.getAttribute("isi");
+                inputSpan.style.display = "initial";
+                span.style.display = "none";
+                btnEdit.setAttribute("jenis", "submit");
+            } else {
+                btnEdit.setAttribute("type", "submit");
+            }
+        }
+    };
+
+    const konfirmasiHapusCourse = document.querySelector(".konfirmasi-hapus-course");
+    const boxKonfirmasiHapusCourse = konfirmasiHapusCourse.children[0];
+    const btnBatalKonfirmasiHapusCourse = konfirmasiHapusCourse.children[0].children[1].children[0];
+    const btnYakinKonfirmasiHapusCourse = btnBatalKonfirmasiHapusCourse.nextElementSibling;
+
+    const btnHapusClickHandler = (e) => {
+        if (btnHapus.innerHTML == "Batal") {
+            item.addEventListener("mouseover", mouseOverHandler);
+            item.addEventListener("mouseout", mouseOutHandler);
+            btnEdit.addEventListener("click", btnEditClickHandler);
+            overlayAdmin.style.alignItems = "flex-start";
+            btnEdit.innerHTML = "Edit";
+            btnHapus.innerHTML = "Hapus";
+            inputSpan.style.display = "none";
+            span.style.display = "block";
+            btnEdit.setAttribute("jenis", "button");
+            btnEdit.setAttribute("type", "button");
+            gambar.src = srcGambarLama;
+        } else {
+            konfirmasiHapusCourse.style.display = "grid";
+            konfirmasiHapusCourse.style.animation = "300ms fadeIn";
+            boxKonfirmasiHapusCourse.style.animation = "300ms fadeInDown";
+            detailMateriId = e.target.getAttribute("detail-materi-id");
+            materiId = e.target.getAttribute("materi-id");
+        }
+    };
+
+    item.addEventListener("mouseover", mouseOverHandler);
+    item.addEventListener("mouseout", mouseOutHandler);
+    btnEdit.addEventListener("click", btnEditClickHandler);
+    btnHapus.addEventListener("click", btnHapusClickHandler);
+
+    btnBatalKonfirmasiHapusCourse.addEventListener("click", () => {
+        boxKonfirmasiHapusCourse.style.animation = "300ms fadeOutUp forwards";
+        konfirmasiHapusCourse.style.animation = "300ms fadeOut forwards";
+        setTimeout(() => {
+            konfirmasiHapusCourse.style.display = "none";
+        }, 300);
+    });
+
+    btnYakinKonfirmasiHapusCourse.addEventListener("click", () => {
+        window.location = `functions/index.php?id-hapus-detail-materi=${detailMateriId}&materi-id=${materiId}`;
+    });
 });

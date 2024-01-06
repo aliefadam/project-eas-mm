@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $conn = mysqli_connect("localhost", "root", "", "geek_tutors");
 
 function login($data)
@@ -22,6 +22,10 @@ function login($data)
             "role" => $role,
         ];
         if (password_verify($password, $row["password"])) {
+            $_SESSION["auth"] = [
+                "nama" => $nama,
+                "role" => $role,
+            ];
             header("Location: ../index.php");
         } else {
             header("Location: ../login.php");
@@ -29,6 +33,12 @@ function login($data)
     } else {
         header("Location: ../login.php");
     }
+}
+
+function logout()
+{
+    session_destroy();
+    header("Location: login.php");
 }
 
 function register($data)
@@ -45,7 +55,7 @@ function register($data)
         return false;
     } else {
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $role = "User";
+        $role = "user";
         $query = "INSERT INTO user VALUES (NULL, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $query);
         mysqli_stmt_bind_param($stmt, "ssss", $nama, $email, $password, $role);
@@ -84,6 +94,27 @@ function getDataCourse()
         $rows[] = $row;
     }
     return $rows;
+}
+
+function getCourseName($id)
+{
+    global $conn;
+    $query = "SELECT * FROM courses WHERE id = $id";
+    $result = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($result)) {
+        return $row["nama_course"];
+    }
+}
+
+function getCourseNameFromMateri($materiId)
+{
+    global $conn;
+
+    $query = "SELECT * FROM materi INNER JOIN courses ON materi.course_id = courses.id WHERE materi.id = $materiId";
+    $result = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($result)) {
+        return $row["nama_course"];
+    }
 }
 
 function updateCourse($data, $logo)
@@ -311,6 +342,21 @@ function deleteDetailMateri($detailMateriId, $materiId)
     header("Location: ../detail-sub-course.php?materi_id=$materiId");
 }
 
+function deleteDetailMateriGambar($detailMateriId, $materiId)
+{
+    global $conn;
+    $query = "SELECT * FROM detail_materi WHERE id = $detailMateriId";
+    $result = mysqli_query($conn, $query);
+    if ($row = mysqli_fetch_assoc($result)) {
+        $namaGambarLama = $row["isi"];
+        unlink("../uploads/$namaGambarLama");
+    }
+
+    $query = "DELETE FROM detail_materi WHERE id = $detailMateriId";
+    mysqli_query($conn, $query);
+    header("Location: ../detail-sub-course.php?materi_id=$materiId");
+}
+
 // ============================================
 
 if (isset($_POST["login"])) {
@@ -367,4 +413,8 @@ if (isset($_POST["edit-detail-materi-gambar"])) {
 
 if (isset($_GET["id-hapus-detail-materi"])) {
     deleteDetailMateri($_GET["id-hapus-detail-materi"], $_GET["materi-id"]);
+}
+
+if (isset($_GET["id-hapus-detail-materi-gambar"])) {
+    deleteDetailMateriGambar($_GET["id-hapus-detail-materi-gambar"], $_GET["materi-id"]);
 }

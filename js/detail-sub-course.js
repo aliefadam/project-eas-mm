@@ -95,8 +95,6 @@ adminEdit.forEach((item) => {
                 if (btnEdit.getAttribute("type") != "submit") {
                     inputGambar.click();
                 }
-            } else {
-                // btnEdit.setAttribute("type", "submit");
             }
         } else {
             if (btnEdit.getAttribute("jenis") == "button") {
@@ -129,7 +127,12 @@ adminEdit.forEach((item) => {
             item.addEventListener("mouseout", mouseOutHandler);
             btnEdit.addEventListener("click", btnEditClickHandler);
             overlayAdmin.style.alignItems = "flex-start";
-            btnEdit.innerHTML = "Edit";
+            if (btnEdit.getAttribute("jenis-materi") == "gambar") {
+                btnEdit.innerHTML = "Ganti Gambar";
+                inputGambar.value = "";
+            } else {
+                btnEdit.innerHTML = "Edit";
+            }
             btnHapus.innerHTML = "Hapus";
             inputSpan.style.display = "none";
             span.style.display = "block";
@@ -159,6 +162,10 @@ adminEdit.forEach((item) => {
     });
 
     btnYakinKonfirmasiHapusCourse.addEventListener("click", () => {
-        window.location = `functions/index.php?id-hapus-detail-materi=${detailMateriId}&materi-id=${materiId}`;
+        if (btnHapus.getAttribute("jenis-materi") == "gambar") {
+            window.location = `functions/index.php?id-hapus-detail-materi-gambar=${detailMateriId}&materi-id=${materiId}`;
+        } else {
+            window.location = `functions/index.php?id-hapus-detail-materi=${detailMateriId}&materi-id=${materiId}`;
+        }
     });
 });

@@ -16,8 +16,8 @@
 
     <!-- header -->
     <header>
-        <h1>Hypertext Markup Language</h1>
-        <span>HTML</span>
+        <h1>Detail Materi</h1>
+        <span><?= getCourseNameFromMateri($_GET["materi_id"]) ?></span>
     </header>
     <!-- akhir header -->
 
@@ -38,7 +38,7 @@
                             <img src="uploads/<?= $isi ?>" alt="">
                             <input type="file" name="isi" id="isi">
                             <div jenis="gambar" class="overlay-admin">
-                                <button type="button" detail-materi-id="<?= $id ?>" materi-id="<?= $materiId ?>">Hapus</button>
+                                <button type="button" detail-materi-id="<?= $id ?>" materi-id="<?= $materiId ?>" jenis-materi="<?= $jenis ?>">Hapus</button>
                                 <button type="button" jenis="button" name="edit-detail-materi-gambar" jenis-materi="<?= $jenis ?>">Ganti Gambar</button>
                             </div>
                         <?php else : ?>
@@ -49,60 +49,51 @@
                                 <textarea type="text" name="isi" id="isi" class="<?= $jenis ?>"></textarea>
                             <?php endif; ?>
                             <div jenis="teks" class="overlay-admin">
-                                <button type="button" detail-materi-id="<?= $id ?>" materi-id="<?= $materiId ?>">Hapus</button>
+                                <button type="button" detail-materi-id="<?= $id ?>" materi-id="<?= $materiId ?>" jenis-materi="<?= $jenis ?>">Hapus</button>
                                 <button type="button" jenis="button" name="edit-detail-materi" jenis-materi="<?= $jenis ?>">Edit</button>
                             </div>
                         <?php endif ?>
                     </div>
                 </form>
             <?php endforeach; ?>
-            <!-- <div class="judul">
-                <span>Pengertian HTML</span>
-            </div>
-            <div class="text">
-                <span>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. A dolor qui eos et saepe debitis dolorem illum repellat distinctio voluptatem odio illo iure, quae ad! Magni beatae eveniet neque possimus? Nostrum pariatur id corrupti distinctio quasi beatae, quod, eligendi hic quisquam repudiandae cum! Possimus rerum nam recusandae quibusdam! At, eaque.
-                </span>
-            </div>
-            <div class="gambar">
-                <img src="imgs/detail-sub-course.png" alt="">
-            </div> -->
-            <div class="aksi">
-                <button type="button" class="btn-tambah-judul">+ Judul</button>
-                <div class="tambah-judul">
-                    <h1>Tambah Judul</h1>
-                    <form action="functions/index.php" method="post">
+            <?php if (isset($_SESSION["auth"]) && $_SESSION["auth"]["role"] == "admin") : ?>
+                <div class="aksi">
+                    <button type="button" class="btn-tambah-judul">+ Judul</button>
+                    <div class="tambah-judul">
+                        <h1>Tambah Judul</h1>
+                        <form action="functions/index.php" method="post">
+                            <input type="hidden" name="materi_id" value="<?= $_GET["materi_id"] ?>">
+                            <div class="form-item">
+                                <label for="isi">Judul</label>
+                                <input type="text" name="isi" id="isi">
+                            </div>
+                            <div class="form-item">
+                                <button name="tambah-judul">Tambah</button>
+                            </div>
+                        </form>
+                    </div>
+                    <button type="button" class="btn-tambah-teks">+ Teks</button>
+                    <div class="tambah-teks">
+                        <h1>Tambah Teks</h1>
+                        <form action="functions/index.php" method="post">
+                            <input type="hidden" name="materi_id" value="<?= $_GET["materi_id"] ?>">
+                            <div class="form-item">
+                                <label for="isi">Teks</label>
+                                <input type="text" name="isi" id="isi">
+                            </div>
+                            <div class="form-item">
+                                <button name="tambah-teks">Tambah</button>
+                            </div>
+                        </form>
+                    </div>
+                    <button type="button" class="btn-tambah-gambar">+ Gambar</button>
+                    <form action="functions/index.php" class="tambah-gambar" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="materi_id" value="<?= $_GET["materi_id"] ?>">
-                        <div class="form-item">
-                            <label for="isi">Judul</label>
-                            <input type="text" name="isi" id="isi">
-                        </div>
-                        <div class="form-item">
-                            <button name="tambah-judul">Tambah</button>
-                        </div>
+                        <input type="file" name="pilih-gambar" id="pilih-gambar">
+                        <button type="submit" name="tambah-gambar">Tambah</button>
                     </form>
                 </div>
-                <button type="button" class="btn-tambah-teks">+ Teks</button>
-                <div class="tambah-teks">
-                    <h1>Tambah Teks</h1>
-                    <form action="functions/index.php" method="post">
-                        <input type="hidden" name="materi_id" value="<?= $_GET["materi_id"] ?>">
-                        <div class="form-item">
-                            <label for="isi">Teks</label>
-                            <input type="text" name="isi" id="isi">
-                        </div>
-                        <div class="form-item">
-                            <button name="tambah-teks">Tambah</button>
-                        </div>
-                    </form>
-                </div>
-                <button type="button" class="btn-tambah-gambar">+ Gambar</button>
-                <form action="functions/index.php" class="tambah-gambar" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="materi_id" value="<?= $_GET["materi_id"] ?>">
-                    <input type="file" name="pilih-gambar" id="pilih-gambar">
-                    <button type="submit" name="tambah-gambar">Tambah</button>
-                </form>
-            </div>
+            <?php endif ?>
         </div>
     </section>
 
@@ -121,8 +112,9 @@
     <!-- footer -->
     <?php include("components/footer.php") ?>
     <!-- akhir footer -->
-
-    <script src="js/detail-sub-course.js"></script>
+    <?php if (isset($_SESSION["auth"]) && $_SESSION["auth"]["role"] == "admin") : ?>
+        <script src="js/detail-sub-course.js"></script>
+    <?php endif ?>
 </body>
 
 </html>

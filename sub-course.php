@@ -16,8 +16,8 @@
 
     <!-- header -->
     <header>
-        <h1>Hypertext Markup Language</h1>
-        <span>HTML</span>
+        <h1>Daftar Materi</h1>
+        <span><?= getCourseName($_GET["course"]) ?></span>
     </header>
     <!-- akhir header -->
 
@@ -42,19 +42,25 @@
                         </div>
                         <div class="item">
                             <span nama-materi="<?= $materi["nama_materi"] ?>"><?= $materi["nama_materi"] ?></span>
-                            <input type="text" name="nama_materi">
+                            <?php if (isset($_SESSION["auth"]) && $_SESSION["auth"]["role"] == "admin") : ?>
+                                <input type="text" name="nama_materi">
+                            <?php endif ?>
                         </div>
                     </div>
-                    <div class="admin">
-                        <button type="button" course-id="<?= $_GET["course"] ?>" materi-id="<?= $materi["id"] ?>" class="btn-hapus">Hapus</button>
-                        <button type="button" class="btn-edit">Edit</button>
-                    </div>
+                    <?php if (isset($_SESSION["auth"]) && $_SESSION["auth"]["role"] == "admin") : ?>
+                        <div class="admin">
+                            <button type="button" course-id="<?= $_GET["course"] ?>" materi-id="<?= $materi["id"] ?>" class="btn-hapus">Hapus</button>
+                            <button type="button" class="btn-edit">Edit</button>
+                        </div>
+                    <?php endif ?>
                 </form>
             </a>
         <?php endforeach; ?>
-        <div class="aksi">
-            <button type="button">+ Tambah Materi</button>
-        </div>
+        <?php if (isset($_SESSION["auth"]) && $_SESSION["auth"]["role"] == "admin") : ?>
+            <div class="aksi">
+                <button type="button">+ Tambah Materi</button>
+            </div>
+        <?php endif ?>
         <div class="tambah-course">
             <h1>Tambah Materi</h1>
             <form action="functions/index.php" method="post">

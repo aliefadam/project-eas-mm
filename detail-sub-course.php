@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="css/detail-sub-course.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -94,6 +95,17 @@
                     </form>
                 </div>
             <?php endif ?>
+        </div>
+        <div class="navigasi">
+            <?php if ($_GET["materi_id"] != getFirstIdMateri($_GET["course_id"])) : ?>
+                <a href="detail-sub-course.php?course_id=<?= $_GET["course_id"] ?>&materi_id=<?= $_GET["materi_id"] - 1 ?>"><i class="bi bi-caret-left-fill"></i> Materi Sebelumnya</a>
+            <?php endif; ?>
+            <a href="sub-course.php?course=<?= $_GET["course_id"] ?>" class="daftar-materi"><i class="bi bi-list-task"></i> Daftar Materi</a>
+            <?php if ($_GET["materi_id"] == getLastIdMateri($_GET["course_id"])) : ?>
+                <a href="detail-sub-course.php?course_id=<?= $_GET["course_id"] ?>&materi_id=<?= $_GET["materi_id"] + 1 ?>"><i class="bi bi-check-lg"></i> Materi Selesai</a>
+            <?php else : ?>
+                <a href="detail-sub-course.php?course_id=<?= $_GET["course_id"] ?>&materi_id=<?= $_GET["materi_id"] + 1 ?>">Materi Selanjutnya <i class="bi bi-caret-right-fill"></i></a>
+            <?php endif; ?>
         </div>
     </section>
 

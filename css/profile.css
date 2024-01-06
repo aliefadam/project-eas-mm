@@ -1,0 +1,100 @@
+@import url("style.css");
+
+.container {
+    margin-top: 20px;
+    height: calc(100vh - 120px);
+    /* border: 2px solid black; */
+    border-radius: 15px;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    gap: 20px;
+}
+
+.riwayat-course {
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid black;
+    flex: 1;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+}
+
+.detail-akun {
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+    flex: 3;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid black;
+}
+
+.detail-akun .detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+}
+
+.detail-akun .detail .kiri {
+    /* flex: 1; */
+    display: flex;
+}
+
+.detail-akun .detail .kiri img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 3px solid black;
+    border-radius: 50%;
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
+}
+
+.detail-akun .detail .kanan {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.detail-akun .detail .kanan span:first-child {
+    font-size: 30px;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.detail-akun .detail .kanan span:last-child {
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.detail-akun .detail .aksi {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+
+    span:last-child {
+        background-color: #dc3545;
+    }
+}
+
+.detail-akun .detail .aksi span {
+    border-radius: 12px;
+    padding: 10px 20px;
+    background-color: #198754;
+    color: white;
+    text-align: center;
+    transition: 300ms;
+
+    > i {
+        color: white;
+    }
+
+    &:hover {
+        background-color: rgb(17, 17, 17);
+    }
+
+    &:last-child:hover {
+        background-color: #d82b3d;
+    }
+}

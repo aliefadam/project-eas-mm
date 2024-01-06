@@ -30,9 +30,12 @@
     <!-- akhir gambar -->
 
     <section class="sub-course">
+        <div class="navigasi">
+            <a href="course.php" class="daftar-materi"><i class="bi bi-caret-left-fill"></i> Daftar Course</a>
+        </div>
         <?php $no = 1; ?>
         <?php foreach (getDataMateri($_GET["course"]) as $materi) : ?>
-            <a href="detail-sub-course.php?materi_id=<?= $materi["id"] ?>" class="sub-course-item">
+            <a href="detail-sub-course.php?course_id=<?= $_GET["course"] ?>&materi_id=<?= $materi["id"] ?>" class="sub-course-item">
                 <form action="functions/index.php" method="post">
                     <input type="hidden" name="materi_id" value="<?= $materi["id"] ?>">
                     <input type="hidden" name="course_id" value="<?= $_GET["course"] ?>">

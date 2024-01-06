@@ -33,6 +33,7 @@ nav .nav-logo a {
 
 nav .nav-menu {
     display: flex;
+    align-items: center;
     gap: 30px;
 }
 
@@ -40,6 +41,26 @@ nav .nav-menu a {
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
     font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    i {
+        display: flex;
+        font-size: 18px;
+        color: black;
+    }
+}
+
+nav .nav-menu a.login {
+    border-radius: 5px;
+    color: white;
+    padding: 8px 20px;
+    background-color: black;
+
+    i {
+        color: white;
+    }
 }
 
 footer {

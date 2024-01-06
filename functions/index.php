@@ -24,6 +24,7 @@ function login($data)
         if (password_verify($password, $row["password"])) {
             $_SESSION["auth"] = [
                 "nama" => $nama,
+                "email" => $email,
                 "role" => $role,
             ];
             header("Location: ../index.php");
@@ -38,7 +39,7 @@ function login($data)
 function logout()
 {
     session_destroy();
-    header("Location: login.php");
+    header("Location: index.php");
 }
 
 function register($data)
@@ -272,6 +273,29 @@ function getJudulMateri($materi_id)
     if ($row = mysqli_fetch_assoc($result)) {
         return $row["nama_materi"];
     }
+}
+
+function getFirstIdMateri($courseId)
+{
+    global $conn;
+    $query = "SELECT * FROM materi WHERE course_id = $courseId";
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows[0]["id"];
+}
+function getLastIdMateri($courseId)
+{
+    global $conn;
+    $query = "SELECT * FROM materi WHERE course_id = $courseId";
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return end($rows)["id"];
 }
 
 function getDataDetailMateri($materiId)

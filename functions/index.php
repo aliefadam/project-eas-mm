@@ -12,7 +12,7 @@ function login($data)
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "s", $email);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $id, $nama, $email, $pw, $role);
+    mysqli_stmt_bind_result($stmt, $id, $nama, $email, $pw, $role, $foto);
     if (mysqli_stmt_fetch($stmt)) {
         $row = [
             "id" => $id,
@@ -20,12 +20,16 @@ function login($data)
             "email" => $email,
             "password" => $pw,
             "role" => $role,
+            "foto" => $foto,
         ];
         if (password_verify($password, $row["password"])) {
             $_SESSION["auth"] = [
+                "id" => $id,
                 "nama" => $nama,
                 "email" => $email,
+                "password" => $pw,
                 "role" => $role,
+                "foto" => $foto,
             ];
             header("Location: ../index.php");
         } else {
@@ -57,9 +61,10 @@ function register($data)
     } else {
         $password = password_hash($password, PASSWORD_DEFAULT);
         $role = "user";
-        $query = "INSERT INTO user VALUES (NULL, ?, ?, ?, ?)";
+        $foto = "no_image.jpg";
+        $query = "INSERT INTO user VALUES (NULL, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "ssss", $nama, $email, $password, $role);
+        mysqli_stmt_bind_param($stmt, "sssss", $nama, $email, $password, $role, $foto);
         mysqli_stmt_execute($stmt);
         header("Location: ../index.php");
     }
@@ -381,6 +386,38 @@ function deleteDetailMateriGambar($detailMateriId, $materiId)
     header("Location: ../detail-sub-course.php?materi_id=$materiId");
 }
 
+function updateNama($data)
+{
+    global $conn;
+    $namaBaru = $data["nama_baru"];
+    $id = $_SESSION["auth"]["id"];
+    $query = "UPDATE user SET nama = ? WHERE id = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "si", $namaBaru, $id);
+    mysqli_stmt_execute($stmt);
+    $_SESSION["auth"]["nama"] = $namaBaru;
+
+    header("Location: ../profile.php");
+}
+
+function updateFoto($gambar)
+{
+    global $conn;
+    $userId = $_SESSION["auth"]["id"];
+    $ekstensiGambar = explode(".", $gambar["name"])[1];
+    $namaGambar = date("YmdHis") . ".$ekstensiGambar";
+
+    $namaGambarLama = $_SESSION["auth"]["foto"];
+    if ($namaGambarLama != "no_image.jpg") {
+        unlink("../uploads/$namaGambarLama");
+    }
+    $query = "UPDATE user SET foto = '$namaGambar' WHERE id = $userId";
+    mysqli_query($conn, $query);
+    move_uploaded_file($gambar["tmp_name"], "../uploads/$namaGambar");
+    $_SESSION["auth"]["foto"] = $namaGambar;
+    header("Location: ../profile.php");
+}
+
 // ============================================
 
 if (isset($_POST["login"])) {
@@ -441,4 +478,12 @@ if (isset($_GET["id-hapus-detail-materi"])) {
 
 if (isset($_GET["id-hapus-detail-materi-gambar"])) {
     deleteDetailMateriGambar($_GET["id-hapus-detail-materi-gambar"], $_GET["materi-id"]);
+}
+
+if (isset($_POST["update-nama"])) {
+    updateNama($_POST);
+}
+
+if (isset($_POST["update-foto"])) {
+    updateFoto($_FILES["foto_baru"]);
 }

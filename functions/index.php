@@ -33,9 +33,17 @@ function login($data)
             ];
             header("Location: ../index.php");
         } else {
+            $_SESSION["notif"] = [
+                "jenis" => "gagal",
+                "pesan" => "Kata Sandi Salah",
+            ];
             header("Location: ../login.php");
         }
     } else {
+        $_SESSION["notif"] = [
+            "jenis" => "gagal",
+            "pesan" => "Email tidak terdaftar",
+        ];
         header("Location: ../login.php");
     }
 }
@@ -418,6 +426,64 @@ function updateFoto($gambar)
     header("Location: ../profile.php");
 }
 
+function gantiKataSandi($data)
+{
+    global $conn;
+    $userId = $_SESSION["auth"]["id"];
+    $kataSandiLama = $_SESSION["auth"]["password"];
+    $inputkataSandiLama = $data["kata-sandi-lama"];
+    $kataSandiBaru = $data["kata-sandi-baru"];
+    $konfirmasiKataSandiBaru = $data["konfirmasi-kata-sandi-baru"];
+
+    if (password_verify($inputkataSandiLama, $kataSandiLama)) {
+        if ($kataSandiBaru == $konfirmasiKataSandiBaru) {
+            $kataSandiBaru = password_hash($kataSandiBaru, PASSWORD_DEFAULT);
+            $query = "UPDATE user SET password = ? WHERE id = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "si", $kataSandiBaru, $userId);
+            mysqli_stmt_execute($stmt);
+            $_SESSION["auth"]["password"] = $kataSandiBaru;
+            $_SESSION["notif"] = [
+                "jenis" => "berhasil",
+                "pesan" => "Berhasil Mengganti Kata Sandi",
+            ];
+            header("Location: ../profile.php");
+        } else {
+            $_SESSION["notif"] = [
+                "jenis" => "gagal",
+                "pesan" => "Konfirmasi Kata Sandi Tidak Sama",
+            ];
+            header("Location: ../profile.php");
+        }
+    } else {
+        $_SESSION["notif"] = [
+            "jenis" => "gagal",
+            "pesan" => "Kata Sandi Lama Tidak Cocok",
+        ];
+        header("Location: ../profile.php");
+    }
+}
+
+function catatRiwayatCourse($materiId, $courseId, $userId)
+{
+    global $conn;
+    $query = "INSERT INTO riwayat_course_dilihat VALUES(NULL, $materiId, $courseId, $userId)";
+    mysqli_query($conn, $query);
+}
+
+function getRiwayatCourse($userId)
+{
+    global $conn;
+    $query = "SELECT * FROM riwayat_course_dilihat rcd INNER JOIN materi ON rcd.materi_id = materi.id INNER JOIN courses ON rcd.course_id = courses.id WHERE user_id = $userId ORDER BY rcd.id DESC";
+    $result = mysqli_query($conn, $query);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+
+    return $rows;
+}
+
 // ============================================
 
 if (isset($_POST["login"])) {
@@ -486,4 +552,8 @@ if (isset($_POST["update-nama"])) {
 
 if (isset($_POST["update-foto"])) {
     updateFoto($_FILES["foto_baru"]);
+}
+
+if (isset($_POST["ganti-kata-sandi"])) {
+    gantiKataSandi($_POST);
 }

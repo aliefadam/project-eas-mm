@@ -61,15 +61,39 @@
                     </div>
                     <div class="form-item aksi">
                         <button type="button">Batal</button>
-                        <button type="submit">Simpan</button>
+                        <button type="submit" name="ganti-kata-sandi">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
         <div class="riwayat-course">
             <h2>Riwayat Course</h2>
+            <div class="scroll">
+                <?php foreach (getRiwayatCourse($_SESSION["auth"]["id"]) as $riwayat) : ?>
+                    <a href="detail-sub-course.php?course_id=<?= $riwayat["course_id"] ?>&materi_id=<?= $riwayat["materi_id"] ?>" class="riwayat">
+                        <span><?= $riwayat["nama_materi"] ?> - <?= $riwayat["nama_course"] ?></span>
+                    </a>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
+
+    <!-- notifikasi -->
+    <?php if (isset($_SESSION["notif"])) : ?>
+        <div class="overlay-notifikasi">
+            <div class="notifikasi">
+                <?php if ($_SESSION["notif"]["jenis"] == "gagal") : ?>
+                    <i class="bi bi-x-circle gagal"></i>
+                <?php else : ?>
+                    <i class="bi bi-check-circle berhasil"></i>
+                <?php endif; ?>
+                <span class="pesan"><?= $_SESSION["notif"]["pesan"] ?></span>
+                <button type="button">OK</button>
+            </div>
+        </div>
+        <?php unset($_SESSION["notif"]); ?>
+    <?php endif; ?>
+    <!-- akhir notifikasi -->
 
     <script src="js/profile.js"></script>
 </body>

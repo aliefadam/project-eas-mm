@@ -1,3 +1,4 @@
+<?php require_once("functions/index.php") ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,10 +28,27 @@
                 <a form="register" href="regsiter.php">Belum punya akun? Silahkan Daftar</a>
             </div>
         </form>
-
     </div>
 
+    <!-- notifikasi -->
+    <?php if (isset($_SESSION["notif"])) : ?>
+        <div class="overlay-notifikasi">
+            <div class="notifikasi">
+                <?php if ($_SESSION["notif"]["jenis"] == "gagal") : ?>
+                    <i class="bi bi-x-circle gagal"></i>
+                <?php else : ?>
+                    <i class="bi bi-check-circle berhasil"></i>
+                <?php endif; ?>
+                <span class="pesan"><?= $_SESSION["notif"]["pesan"] ?></span>
+                <button type="button">OK</button>
+            </div>
+        </div>
+        <?php unset($_SESSION["notif"]); ?>
+    <?php endif; ?>
+    <!-- akhir notifikasi -->
+
     <script src="js/script.js"></script>
+    <script src="js/login.js"></script>
 </body>
 
 </html>

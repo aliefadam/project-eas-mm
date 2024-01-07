@@ -1,4 +1,6 @@
 <?php require_once("functions/index.php") ?>
+<?php catatRiwayatCourse($_GET["materi_id"], $_GET["course_id"], $_SESSION["auth"]["id"]) ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

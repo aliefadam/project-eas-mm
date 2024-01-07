@@ -32,6 +32,10 @@ header h1 {
     font-size: 20px;
     font-family: "Poppins", sans-serif;
     text-align: justify;
+
+    &:nth-child(3) {
+        margin-top: 20px;
+    }
 }
 
 .detail .developer {

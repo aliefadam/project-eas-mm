@@ -234,6 +234,7 @@ function tambahJudul($data)
 {
     global $conn;
     $materiId = $data["materi_id"];
+    $courseId = $data["course_id"];
     $isi = htmlspecialchars($data["isi"]);
     $jenisDetailMateri = "judul";
 
@@ -242,13 +243,14 @@ function tambahJudul($data)
     mysqli_stmt_bind_param($stmt, "ssi", $jenisDetailMateri, $isi, $materiId);
     mysqli_stmt_execute($stmt);
 
-    header("Location: ../detail-sub-course.php?materi_id=$materiId");
+    header("Location: ../detail-sub-course.php?course_id=$courseId&materi_id=$materiId");
 }
 
 function tambahTeks($data)
 {
     global $conn;
     $materiId = $data["materi_id"];
+    $courseId = $data["course_id"];
     $isi = htmlspecialchars($data["isi"]);
     $jenisDetailMateri = "text";
 
@@ -257,13 +259,14 @@ function tambahTeks($data)
     mysqli_stmt_bind_param($stmt, "ssi", $jenisDetailMateri, $isi, $materiId);
     mysqli_stmt_execute($stmt);
 
-    header("Location: ../detail-sub-course.php?materi_id=$materiId");
+    header("Location: ../detail-sub-course.php?course_id=$courseId&materi_id=$materiId");
 }
 
 function tambahGambar($data, $gambar)
 {
     global $conn;
     $materiId = $data["materi_id"];
+    $courseId = $data["course_id"];
     $ektensiGambar = explode(".", $gambar["name"])[1];
     $namaGambar = date("YmdHis") . ".$ektensiGambar";
     move_uploaded_file($gambar["tmp_name"], "../uploads/$namaGambar");
@@ -275,7 +278,7 @@ function tambahGambar($data, $gambar)
     mysqli_stmt_bind_param($stmt, "ssi", $jenisDetailMateri, $namaGambar, $materiId);
     mysqli_stmt_execute($stmt);
 
-    header("Location: ../detail-sub-course.php?materi_id=$materiId");
+    header("Location: ../detail-sub-course.php?course_id=$courseId&materi_id=$materiId");
 }
 
 function getJudulMateri($materi_id)
@@ -329,6 +332,7 @@ function updateDetailMateri($data)
     global $conn;
     $detailMateriId = $data["detail_materi_id"];
     $materiId = $data["materi_id"];
+    $courseId = $data["course_id"];
     $jenis = $data["jenis"];
     $isi = htmlspecialchars($data["isi"]);
 
@@ -344,7 +348,7 @@ function updateDetailMateri($data)
     mysqli_stmt_bind_param($stmt, "si", $isi, $detailMateriId);
     mysqli_stmt_execute($stmt);
 
-    header("Location: ../detail-sub-course.php?materi_id=$materiId");
+    header("Location: ../detail-sub-course.php?course_id=$courseId&materi_id=$materiId");
 }
 
 function updateDetailMateriGambar($data, $gambar)
@@ -352,6 +356,7 @@ function updateDetailMateriGambar($data, $gambar)
     global $conn;
     $detailMateriId = $data["detail_materi_id"];
     $materiId = $data["materi_id"];
+    $courseId = $data["course_id"];
     $ektensiGambar = explode(".", $gambar["name"])[1];
     $namaGambar = date("YmdHis") . ".$ektensiGambar";
     move_uploaded_file($gambar["tmp_name"], "../uploads/$namaGambar");
@@ -368,18 +373,18 @@ function updateDetailMateriGambar($data, $gambar)
     mysqli_stmt_bind_param($stmt, "si", $namaGambar, $detailMateriId);
     mysqli_stmt_execute($stmt);
 
-    header("Location: ../detail-sub-course.php?materi_id=$materiId");
+    header("Location: ../detail-sub-course.php?course_id=$courseId&materi_id=$materiId");
 }
 
-function deleteDetailMateri($detailMateriId, $materiId)
+function deleteDetailMateri($detailMateriId, $materiId, $courseId)
 {
     global $conn;
     $query = "DELETE FROM detail_materi WHERE id = $detailMateriId";
     mysqli_query($conn, $query);
-    header("Location: ../detail-sub-course.php?materi_id=$materiId");
+    header("Location: ../detail-sub-course.php?course_id=$courseId&materi_id=$materiId");
 }
 
-function deleteDetailMateriGambar($detailMateriId, $materiId)
+function deleteDetailMateriGambar($detailMateriId, $materiId, $courseId)
 {
     global $conn;
     $query = "SELECT * FROM detail_materi WHERE id = $detailMateriId";
@@ -391,7 +396,7 @@ function deleteDetailMateriGambar($detailMateriId, $materiId)
 
     $query = "DELETE FROM detail_materi WHERE id = $detailMateriId";
     mysqli_query($conn, $query);
-    header("Location: ../detail-sub-course.php?materi_id=$materiId");
+    header("Location: ../detail-sub-course.php?course_id=$courseId&materi_id=$materiId");
 }
 
 function updateNama($data)
@@ -484,6 +489,22 @@ function getRiwayatCourse($userId)
     return $rows;
 }
 
+function getJumlahCourse()
+{
+    global $conn;
+    $query = "SELECT COUNT(*) as total FROM courses";
+    $result = mysqli_query($conn, $query);
+    return mysqli_fetch_assoc($result)["total"];
+}
+
+function getJumlahUser()
+{
+    global $conn;
+    $query = "SELECT COUNT(*) as total FROM user WHERE role != 'admin'";
+    $result = mysqli_query($conn, $query);
+    return mysqli_fetch_assoc($result)["total"];
+}
+
 // ============================================
 
 if (isset($_POST["login"])) {
@@ -539,11 +560,11 @@ if (isset($_POST["edit-detail-materi-gambar"])) {
 }
 
 if (isset($_GET["id-hapus-detail-materi"])) {
-    deleteDetailMateri($_GET["id-hapus-detail-materi"], $_GET["materi-id"]);
+    deleteDetailMateri($_GET["id-hapus-detail-materi"], $_GET["materi-id"], $_GET["course-id"]);
 }
 
 if (isset($_GET["id-hapus-detail-materi-gambar"])) {
-    deleteDetailMateriGambar($_GET["id-hapus-detail-materi-gambar"], $_GET["materi-id"]);
+    deleteDetailMateriGambar($_GET["id-hapus-detail-materi-gambar"], $_GET["materi-id"], $_GET["course-id"]);
 }
 
 if (isset($_POST["update-nama"])) {

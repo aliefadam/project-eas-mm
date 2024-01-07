@@ -1,5 +1,7 @@
 <?php require_once("functions/index.php") ?>
-<?php catatRiwayatCourse($_GET["materi_id"], $_GET["course_id"], $_SESSION["auth"]["id"]) ?>
+<?php if (isset($_SESSION["auth"]) && $_SESSION["auth"]["role"] != "admin") : ?>
+    <?php catatRiwayatCourse($_GET["materi_id"], $_GET["course_id"], $_SESSION["auth"]["id"]) ?>
+<?php endif ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +36,7 @@
             <?php foreach (getDataDetailMateri($_GET["materi_id"]) as ["id" => $id, "jenis_detail_materi" => $jenis, "isi" => $isi, "materi_id" => $materiId]) : ?>
                 <form action="functions/index.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="detail_materi_id" value="<?= $id ?>">
+                    <input type="hidden" name="course_id" value="<?= $_GET["course_id"] ?>">
                     <input type="hidden" name="materi_id" value="<?= $_GET["materi_id"] ?>">
                     <input type="hidden" name="jenis" value="<?= $jenis ?>">
                     <div class="<?= $jenis ?> admin-edit">
@@ -41,7 +44,7 @@
                             <img src="uploads/<?= $isi ?>" alt="">
                             <input type="file" name="isi" id="isi">
                             <div jenis="gambar" class="overlay-admin">
-                                <button type="button" detail-materi-id="<?= $id ?>" materi-id="<?= $materiId ?>" jenis-materi="<?= $jenis ?>">Hapus</button>
+                                <button type="button" detail-materi-id="<?= $id ?>" course-id="<?= $_GET["course_id"] ?>" materi-id="<?= $materiId ?>" jenis-materi="<?= $jenis ?>">Hapus</button>
                                 <button type="button" jenis="button" name="edit-detail-materi-gambar" jenis-materi="<?= $jenis ?>">Ganti Gambar</button>
                             </div>
                         <?php else : ?>
@@ -52,7 +55,7 @@
                                 <textarea type="text" name="isi" id="isi" class="<?= $jenis ?>"></textarea>
                             <?php endif; ?>
                             <div jenis="teks" class="overlay-admin">
-                                <button type="button" detail-materi-id="<?= $id ?>" materi-id="<?= $materiId ?>" jenis-materi="<?= $jenis ?>">Hapus</button>
+                                <button type="button" detail-materi-id="<?= $id ?>" course-id="<?= $_GET["course_id"] ?>" materi-id="<?= $materiId ?>" jenis-materi="<?= $jenis ?>">Hapus</button>
                                 <button type="button" jenis="button" name="edit-detail-materi" jenis-materi="<?= $jenis ?>">Edit</button>
                             </div>
                         <?php endif ?>
@@ -65,6 +68,7 @@
                     <div class="tambah-judul">
                         <h1>Tambah Judul</h1>
                         <form action="functions/index.php" method="post">
+                            <input type="hidden" name="course_id" value="<?= $_GET["course_id"] ?>">
                             <input type="hidden" name="materi_id" value="<?= $_GET["materi_id"] ?>">
                             <div class="form-item">
                                 <label for="isi">Judul</label>
@@ -79,6 +83,7 @@
                     <div class="tambah-teks">
                         <h1>Tambah Teks</h1>
                         <form action="functions/index.php" method="post">
+                            <input type="hidden" name="course_id" value="<?= $_GET["course_id"] ?>">
                             <input type="hidden" name="materi_id" value="<?= $_GET["materi_id"] ?>">
                             <div class="form-item">
                                 <label for="isi">Teks</label>
@@ -91,6 +96,7 @@
                     </div>
                     <button type="button" class="btn-tambah-gambar">+ Gambar</button>
                     <form action="functions/index.php" class="tambah-gambar" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="course_id" value="<?= $_GET["course_id"] ?>">
                         <input type="hidden" name="materi_id" value="<?= $_GET["materi_id"] ?>">
                         <input type="file" name="pilih-gambar" id="pilih-gambar">
                         <button type="submit" name="tambah-gambar">Tambah</button>
@@ -103,9 +109,7 @@
                 <a href="detail-sub-course.php?course_id=<?= $_GET["course_id"] ?>&materi_id=<?= $_GET["materi_id"] - 1 ?>"><i class="bi bi-caret-left-fill"></i> Materi Sebelumnya</a>
             <?php endif; ?>
             <a href="sub-course.php?course=<?= $_GET["course_id"] ?>" class="daftar-materi"><i class="bi bi-list-task"></i> Daftar Materi</a>
-            <?php if ($_GET["materi_id"] == getLastIdMateri($_GET["course_id"])) : ?>
-                <a href="detail-sub-course.php?course_id=<?= $_GET["course_id"] ?>&materi_id=<?= $_GET["materi_id"] + 1 ?>"><i class="bi bi-check-lg"></i> Materi Selesai</a>
-            <?php else : ?>
+            <?php if ($_GET["materi_id"] != getLastIdMateri($_GET["course_id"])) : ?>
                 <a href="detail-sub-course.php?course_id=<?= $_GET["course_id"] ?>&materi_id=<?= $_GET["materi_id"] + 1 ?>">Materi Selanjutnya <i class="bi bi-caret-right-fill"></i></a>
             <?php endif; ?>
         </div>

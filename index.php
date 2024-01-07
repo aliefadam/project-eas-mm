@@ -1,4 +1,4 @@
-<?php session_start() ?>
+<?php require_once("functions/index.php") ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,12 +19,12 @@
         <header>
             <div class="item">
                 <div class="wrapper">
-                    <span>Welcome to GeekTutors!</span>
+                    <span>Hi, Selamat Datang di GeekTutors!</span>
                     <img src="imgs/programming 1.png" alt="">
                 </div>
             </div>
             <div class="item">
-                <span>Where Your Learning Dreams Come to Life with GeekTutors!</span>
+                <span>Tempat Di Mana Impian Belajarmu Jadi Nyata bersama GeekTutors!</span>
             </div>
             <div class="item"></div>
             <!-- <img src="imgs/home.png" alt=""> -->
@@ -35,10 +35,9 @@
     <!-- about -->
     <section class="about">
         <div class="item">
-            <h1>About GeekTutors</h1>
+            <h1>Tentang GeekTutors</h1>
             <p>
-                Not only can you embark on a journey of learning with GeekTutors, but you can also tailor your educational experience with our user-friendly platform. Say goodbye to standardized learning and hello to personalized and professionally curated content that will make your educational journey stand out from the rest.
-            </p>
+                Tidak hanya bisa memulai perjalanan belajar bersama GeekTutors, tapi Anda juga dapat menyesuaikan pengalaman pendidikan Anda dengan platform kami yang ramah pengguna. Katakan selamat tinggal pada pembelajaran standar dan sambutlah konten yang dipersonalisasi dan disusun secara profesional yang akan membuat perjalanan pendidikan Anda menonjol dari yang lain.</p>
         </div>
         <div class="item">
             <img src="imgs/Rectangle 4.png" alt="">
@@ -53,20 +52,20 @@
             <div class="course-item">
                 <img src="imgs/Rectangle 15.png" alt="">
                 <span class="course-name">HTML</span>
-                <span class="course-desk">Become a potential and professional freelancer</span>
+                <span class="course-desk">Menjadi Ahli HTML dengan Mudah</span>
             </div>
             <div class="course-item">
                 <img src="imgs/Rectangle 15 (1).png" alt="">
                 <span class="course-name">CSS</span>
-                <span class="course-desk">Become a potential and professional freelancer</span>
+                <span class="course-desk">Menguasai Daya Tarik Visual dengan CSS</span>
             </div>
             <div class="course-item">
                 <img src="imgs/Rectangle 15 (2).png" alt="">
                 <span class="course-name">WEB</span>
-                <span class="course-desk">Become a potential and professional freelancer</span>
+                <span class="course-desk">Desain dan Implementasi: Kelas Proyek Web</span>
             </div>
         </div>
-        <button class="view-more" onclick="window.location = 'course.php'">View More</button>
+        <button class="view-more" onclick="window.location = 'course.php'">Lihat Semua Kursus</button>
     </section>
     <!-- akhir course -->
 

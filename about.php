@@ -1,3 +1,4 @@
+<?php require_once("functions/index.php") ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,14 +16,17 @@
 
     <!-- header -->
     <header>
-        <h1>About GeekTutors</h1>
+        <h1>Tentang GeekTutors</h1>
 
     </header>
     <!-- akhir header -->
 
     <section class="detail">
         <img src="imgs/Rectangle 4.png" alt="">
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. A dolor qui eos et saepe debitis dolorem illum repellat distinctio voluptatem odio illo iure, quae ad! Magni beatae eveniet neque possimus? Nostrum pariatur id corrupti distinctio quasi beatae, quod, eligendi hic quisquam repudiandae cum! Possimus rerum nam recusandae quibusdam! At, eaque.</p>
+        <p>GeekTutors adalah platform pembelajaran daring yang menawarkan beragam kursus dalam bidang informatika dan teknologi. Kami bertujuan untuk memberikan pengalaman pembelajaran yang menarik dan terjangkau kepada semua orang, baik pemula maupun mereka yang ingin meningkatkan keterampilan teknis mereka.
+        </p>
+        <p>Visi Kami:
+            "Menjadikan pembelajaran informatika lebih mudah diakses, menyenangkan, dan memberdayakan setiap individu untuk meraih sukses di era digital."</p>
 
         <div class="developer">
             <div class="row">
@@ -53,7 +57,7 @@
                         </div>
                     </div>
                     <div class="bawah">
-                        <span>Things Im Good At</span>
+                        <span>Hal-hal yang saya kuasai</span>
                     </div>
                 </div>
             </div>
@@ -78,7 +82,7 @@
                         </div>
                     </div>
                     <div class="bawah">
-                        <span>Things Im Good At</span>
+                        <span>Hal-hal yang saya kuasai</span>
                     </div>
                 </div>
                 <div class="profile">

@@ -17,8 +17,8 @@
 
     <!-- header -->
     <header>
-        <h1>Course with GeekTutors!</h1>
-        <span>CODE</span>
+        <h1>Pelajari Bersama GeekTutors!</h1>
+        <span>KURSUS</span>
     </header>
     <!-- akhir header -->
 

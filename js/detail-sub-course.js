@@ -145,6 +145,7 @@ adminEdit.forEach((item) => {
             boxKonfirmasiHapusCourse.style.animation = "300ms fadeInDown";
             detailMateriId = e.target.getAttribute("detail-materi-id");
             materiId = e.target.getAttribute("materi-id");
+            courseId = e.target.getAttribute("course-id");
         }
     };
 
@@ -162,10 +163,11 @@ adminEdit.forEach((item) => {
     });
 
     btnYakinKonfirmasiHapusCourse.addEventListener("click", () => {
+        console.log(courseId);
         if (btnHapus.getAttribute("jenis-materi") == "gambar") {
-            window.location = `functions/index.php?id-hapus-detail-materi-gambar=${detailMateriId}&materi-id=${materiId}`;
+            window.location = `functions/index.php?id-hapus-detail-materi-gambar=${detailMateriId}&materi-id=${materiId}&course-id=${courseId}`;
         } else {
-            window.location = `functions/index.php?id-hapus-detail-materi=${detailMateriId}&materi-id=${materiId}`;
+            window.location = `functions/index.php?id-hapus-detail-materi=${detailMateriId}&materi-id=${materiId}&course-id=${courseId}`;
         }
     });
 });

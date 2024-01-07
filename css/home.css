@@ -47,7 +47,6 @@ section {
 }
 
 .home header .item:nth-child(2) {
-    /* border: 1px solid red; */
     flex: 6;
     display: flex;
     align-items: center;
@@ -56,10 +55,10 @@ section {
 .home header .item:nth-child(2) span {
     color: white;
     font-family: "Inter", sans-serif;
-    font-size: 70px;
-    font-weight: bold;
-    width: 60%;
-    line-height: 70px;
+    font-size: 50px;
+    font-weight: 900;
+    width: 50%;
+    /* line-height: 70px; */
 }
 
 .home header .item:last-child {
@@ -89,12 +88,12 @@ section {
 }
 
 .about .item:first-child h1 {
-    font-size: 55px;
+    font-size: 50px;
     font-weight: 800;
 }
 
 .about .item:first-child p {
-    width: 80%;
+    width: 90%;
     font-size: 16px;
     font-weight: 600;
     line-height: 25px;
@@ -160,7 +159,8 @@ section {
 .course button.view-more {
     /* margin-top: 70px; */
     display: block;
-    height: 90px;
+    /* height: 50px; */
+    padding: 20px 0;
     width: 350px;
     margin: 40px auto;
     margin-bottom: 0;
@@ -169,7 +169,7 @@ section {
     border: none;
     cursor: pointer;
     font-family: "Poppins", sans-serif;
-    font-size: 24px;
+    font-size: 20px;
     border-radius: 15px;
     font-weight: 500;
 }

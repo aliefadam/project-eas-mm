@@ -6,22 +6,22 @@
                 <span class="sub-title">Ease of being together</span>
             </div>
             <div class="sub-item">
-                <span class="title">SOCIAL MEDIA</span>
+                <span class="title">MEDIA SOSIAL</span>
                 <a href="" class="sub-title">Instagram</a>
                 <a href="" class="sub-title">Twitter</a>
                 <a href="" class="sub-title">Youtube</a>
             </div>
             <div class="sub-item">
-                <span class="title">COURSE</span>
-                <a href="" class="sub-title">HTML</a>
-                <a href="" class="sub-title">CSS</a>
-                <a href="" class="sub-title">WEB</a>
+                <span class="title">KURSUS</span>
+                <?php foreach (getDataCourse() as $course) : ?>
+                    <a href="sub-course.php?course=<?= $course["id"] ?>" class="sub-title"><?= $course["nama_course"] ?></a>
+                <?php endforeach ?>
             </div>
             <div class="sub-item">
-                <span class="title">ABOUT</span>
-                <a href="" class="sub-title">About Us</a>
+                <span class="title">TENTANG</span>
+                <a href="" class="sub-title">Tentang Kita</a>
                 <a href="" class="sub-title">Blog</a>
-                <a href="" class="sub-title">Event</a>
+                <a href="" class="sub-title">Acara</a>
             </div>
         </div>
         <div class="item">

@@ -66,16 +66,29 @@
                 </form>
             </div>
         </div>
-        <div class="riwayat-course">
-            <h2>Riwayat Course</h2>
-            <div class="scroll">
-                <?php foreach (getRiwayatCourse($_SESSION["auth"]["id"]) as $riwayat) : ?>
-                    <a href="detail-sub-course.php?course_id=<?= $riwayat["course_id"] ?>&materi_id=<?= $riwayat["materi_id"] ?>" class="riwayat">
-                        <span><?= $riwayat["nama_materi"] ?> - <?= $riwayat["nama_course"] ?></span>
-                    </a>
-                <?php endforeach; ?>
+        <?php if ($_SESSION["auth"]["role"] == "admin") : ?>
+            <div class="admin">
+                <div class="item">
+                    <span class="jumlah"><?= getJumlahCourse() ?></span>
+                    <span class="keterangan">Jumlah Courses Saat Ini</span>
+                </div>
+                <div class="item">
+                    <span class="jumlah"><?= getJumlahUser() ?></span>
+                    <span class="keterangan">Jumlah User Terdaftar</span>
+                </div>
             </div>
-        </div>
+        <?php else : ?>
+            <div class="riwayat-course">
+                <h2>Riwayat Course</h2>
+                <div class="scroll">
+                    <?php foreach (getRiwayatCourse($_SESSION["auth"]["id"]) as $riwayat) : ?>
+                        <a href="detail-sub-course.php?course_id=<?= $riwayat["course_id"] ?>&materi_id=<?= $riwayat["materi_id"] ?>" class="riwayat">
+                            <span><?= $riwayat["nama_materi"] ?> - <?= $riwayat["nama_course"] ?></span>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        <?php endif ?>
     </div>
 
     <!-- notifikasi -->

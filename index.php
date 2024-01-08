@@ -72,6 +72,8 @@
     <!-- footer -->
     <?php include("components/footer.php") ?>
     <!-- akhir footer -->
+
+    <script src="js/nav.js"></script>
 </body>
 
 </html>

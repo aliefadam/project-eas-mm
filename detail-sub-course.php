@@ -133,6 +133,8 @@
     <?php if (isset($_SESSION["auth"]) && $_SESSION["auth"]["role"] == "admin") : ?>
         <script src="js/detail-sub-course.js"></script>
     <?php endif ?>
+    <script src="js/nav.js"></script>
+
 </body>
 
 </html>

@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Judul Halaman</title>
+        <link rel="stylesheet" href="style.css" />
+        <style>
+            .container {
+                width: 50%;
+                height: 100px;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                border: 2px solid black;
+            }
+
+            .item {
+                box-sizing: border-box;
+                flex: 1;
+                padding: 10px;
+            }
+
+            .item-1 {
+                background-color: lightcoral;
+            }
+
+            .item-2 {
+                background-color: lightblue;
+            }
+
+            .item-3 {
+                background-color: lightgreen;
+            }
+        </style>
     </head>
     <body>
-        <img src="one_piece.jpg" alt="Deskripsi Gambar" />
+        <div class="container">
+            <div class="item item-1">ITEM 1</div>
+            <div class="item item-2">ITEM 2</div>
+            <div class="item item-3">ITEM 3</div>
+        </div>
     </body>
 </html>

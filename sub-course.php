@@ -96,6 +96,8 @@
     <!-- akhir footer -->
 
     <script src="js/sub-course.js"></script>
+    <script src="js/nav.js"></script>
+
 </body>
 
 </html>

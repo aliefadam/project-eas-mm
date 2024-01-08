@@ -1,0 +1,260 @@
+html,
+body,
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 100px;
+    height: 80px;
+    align-items: center;
+}
+
+nav .nav-logo a {
+    font-family: "Lalezar", system-ui;
+    text-decoration: none;
+    color: #df0305;
+    font-size: 32px;
+}
+
+nav .nav-item a {
+    font-family: "Lalezar", system-ui;
+    text-decoration: none;
+    color: #94bb6e;
+    font-size: 22px;
+}
+
+header {
+    height: 740px;
+}
+
+header img {
+    width: 100%;
+    height: 100%;
+}
+
+section {
+    padding: 84px 100px;
+}
+
+.bagian-1 {
+    height: 768px;
+    background-color: #dc0541;
+}
+
+.bagian-1 h1 {
+    font-family: "Poppins", sans-serif;
+    font-size: 52px;
+    color: white;
+    text-align: center;
+    font-weight: 900;
+}
+
+.bagian-1 p {
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    font-weight: medium;
+    width: 585px;
+    margin: 10px auto;
+}
+
+.bagian-1 .items {
+    margin-top: 84px;
+    height: 342px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bagian-1 .items .card {
+    width: 248px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bagian-1 .items .card span {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-size: 32px;
+    color: white;
+    margin-top: 15px;
+}
+
+.bagian-1 .items .card a {
+    font-family: "Poppins", sans-serif;
+    color: black;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 109px;
+    background-color: #94bb6e;
+    height: 26px;
+    border: none;
+    font-size: 12px;
+    font-weight: 900;
+    margin-top: 5px;
+}
+
+.bagian-2 {
+    background-color: black;
+    height: 463px;
+}
+
+.bagian-2 .items {
+    display: flex;
+    height: 295px;
+    gap: 29px;
+}
+
+.bagian-2 .items .left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bagian-2 .items .left h1 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    color: white;
+    width: 435px;
+    text-align: center;
+}
+
+.bagian-2 .items .left p {
+    margin-top: 15px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    color: white;
+    width: 433px;
+}
+
+.bagian-2 .items .right {
+    flex: 1;
+}
+
+.bagian-2 .items .right img {
+    width: 100%;
+    height: 100%;
+}
+
+.bagian-3 {
+    background-color: #3b15e1;
+    height: 463px;
+}
+
+.bagian-3 .items {
+    display: flex;
+    height: 295px;
+    gap: 29px;
+}
+
+.bagian-3 .items .left {
+    flex: 1;
+}
+
+.bagian-3 .items .left img {
+    width: 100%;
+    height: 100%;
+}
+
+.bagian-3 .items .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bagian-3 .items .right h1 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    color: white;
+    width: 435px;
+    text-align: center;
+}
+
+.bagian-3 .items .right p {
+    margin-top: 15px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    color: white;
+    width: 433px;
+    text-align: right;
+}
+
+.bagian-4 {
+    background-color: white;
+    height: 463px;
+}
+
+.bagian-4 .items {
+    display: flex;
+    height: 295px;
+    gap: 29px;
+}
+
+.bagian-4 .items .left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bagian-4 .items .left h1 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    color: #3b15e1;
+    width: 435px;
+    text-align: center;
+}
+
+.bagian-4 .items .left p {
+    margin-top: 15px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 18px;
+    color: black;
+    font-weight: 600;
+    width: 433px;
+}
+
+.bagian-4 .items .right {
+    flex: 1;
+}
+
+.bagian-4 .items .right img {
+    width: 100%;
+    height: 100%;
+}
+
+footer {
+    height: 243px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+footer span {
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+    width: 1080px;
+    font-style: italic;
+}

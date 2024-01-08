@@ -8,7 +8,7 @@ window.addEventListener("scroll", () => {
         nav.style.animation = "300ms fadeInDown forwards";
         nav.classList.add("scrolling");
     } else {
-        nav.style.animation = "300ms fadeOutUp forwards";
+        nav.style.animation = "";
         nav.classList.remove("scrolling");
     }
 });

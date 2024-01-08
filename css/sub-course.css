@@ -256,6 +256,7 @@ header span {
     content: "";
     display: none;
     place-content: center;
+    z-index: 3;
 }
 
 .overlay .box {

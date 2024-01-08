@@ -5,7 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Daftar Materi</title>
+    <link rel="icon" href="imgs/logo-web.svg">
     <link rel="stylesheet" href="css/sub-course.css">
 </head>
 

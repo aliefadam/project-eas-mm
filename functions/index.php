@@ -1,6 +1,7 @@
 <?php
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "geek_tutors");
+// $conn = mysqli_connect("localhost", "root", "", "geek_tutors");
+$conn = mysqli_connect("sql108.infinityfree.com", "if0_35790994", "3yZGLPrmxx5Cw", "if0_35790994_geek_tutors");
 
 function login($data)
 {
@@ -74,7 +75,11 @@ function register($data)
         $stmt = mysqli_prepare($conn, $query);
         mysqli_stmt_bind_param($stmt, "sssss", $nama, $email, $password, $role, $foto);
         mysqli_stmt_execute($stmt);
-        header("Location: ../index.php");
+        $_SESSION["notif"] = [
+            "jenis" => "berhasil",
+            "pesan" => "Registrasi Berhasil",
+        ];
+        header("Location: ../login.php");
     }
 }
 
